@@ -1,6 +1,6 @@
 package com.sip.tp.model;
 
-public record RegistroPerfilEmpresa(
+public record PerfilEmpresaData(
         String nombre,
         String industria,
         String numeroTrabajadores

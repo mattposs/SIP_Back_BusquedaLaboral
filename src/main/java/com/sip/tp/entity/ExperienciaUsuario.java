@@ -1,6 +1,9 @@
 package com.sip.tp.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,20 +12,21 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
-public class PerfilReclutador {
+public class ExperienciaUsuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PerfilEmpresa empresa;
-    private String nombre;
+    private String empresa;
     private String cargo;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
 
     @Override
     public boolean equals(Object o) {
@@ -30,7 +34,7 @@ public class PerfilReclutador {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        PerfilReclutador that = (PerfilReclutador) o;
+        ExperienciaUsuario that = (ExperienciaUsuario) o;
 
         return new EqualsBuilder().append(getId(), that.getId()).isEquals();
     }
@@ -45,8 +49,9 @@ public class PerfilReclutador {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
                 .append("id", id)
                 .append("empresa", empresa)
-                .append("nombre", nombre)
                 .append("cargo", cargo)
+                .append("fechaInicio", fechaInicio)
+                .append("fechaFin", fechaFin)
                 .toString();
     }
 }

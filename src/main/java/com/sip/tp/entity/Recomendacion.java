@@ -24,7 +24,7 @@ public class Recomendacion {
     @OneToOne
     private PerfilUsuario recomendador;
     private String estado;
-    private String textoRecomendacion;
+    private String detalleRecomendacion;
 
     @Override
     public boolean equals(Object o) {
