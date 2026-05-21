@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,16 +16,23 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class PerfilEmpresa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @OneToMany(fetch = FetchType.LAZY)
-    private List<PerfilReclutador> reclutadores;
+    private List<PerfilUsuario> reclutadores;
     private String nombre;
     private String industria;
     private String numeroTrabajadores;
+
+    public PerfilEmpresa(String nombre, String industria, String numeroTrabajadores) {
+        this.nombre = nombre;
+        this.industria = industria;
+        this.numeroTrabajadores = numeroTrabajadores;
+    }
 
     @Override
     public boolean equals(Object o) {
