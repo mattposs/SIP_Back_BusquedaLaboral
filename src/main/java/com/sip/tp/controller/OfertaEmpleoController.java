@@ -5,7 +5,8 @@ import com.sip.tp.model.OfertaEmpleoData;
 import com.sip.tp.service.OfertaEmpleoService;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("v1/oferta")
+@RestController
+@RequestMapping("v1/oferta")
 public class OfertaEmpleoController {
     private final OfertaEmpleoService ofertaEmpleoService;
 

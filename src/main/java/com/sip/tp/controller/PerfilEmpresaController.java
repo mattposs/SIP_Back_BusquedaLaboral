@@ -5,7 +5,8 @@ import com.sip.tp.model.PerfilEmpresaData;
 import com.sip.tp.service.PerfilEmpresaService;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("v1/perfiles/empresas")
+@RestController
+@RequestMapping("v1/perfiles/empresas")
 public class PerfilEmpresaController {
     private final PerfilEmpresaService perfilEmpresaService;
 
