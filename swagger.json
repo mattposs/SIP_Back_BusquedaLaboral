@@ -1,0 +1,819 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/updateUserProfile": {
+      "put": {
+        "tags": [
+          "perfil-usuario-controller"
+        ],
+        "operationId": "updateUserProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilUsuarioData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilUsuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/updateOffer": {
+      "put": {
+        "tags": [
+          "oferta-empleo-controller"
+        ],
+        "operationId": "updateOffer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfertaEmpleoData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfertaEmpleo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/updateCompanyProfile": {
+      "put": {
+        "tags": [
+          "perfil-empresa-controller"
+        ],
+        "operationId": "updateCompanyProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilEmpresaData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilEmpresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/updateApplication": {
+      "put": {
+        "tags": [
+          "postulacion-controller"
+        ],
+        "operationId": "updateApplication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreacionPostulacionOferta"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Postulacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saveUserProfile": {
+      "post": {
+        "tags": [
+          "perfil-usuario-controller"
+        ],
+        "operationId": "saveUserProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilUsuarioData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilUsuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saveRecommendation": {
+      "post": {
+        "tags": [
+          "recomendacion-controller"
+        ],
+        "operationId": "saveRecommendation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Recomendacion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Recomendacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saveOffer": {
+      "post": {
+        "tags": [
+          "oferta-empleo-controller"
+        ],
+        "operationId": "saveOffer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfertaEmpleoData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfertaEmpleo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saveCompanyProfile": {
+      "post": {
+        "tags": [
+          "perfil-empresa-controller"
+        ],
+        "operationId": "saveCompanyProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilEmpresaData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilEmpresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saveApplication": {
+      "post": {
+        "tags": [
+          "postulacion-controller"
+        ],
+        "operationId": "saveApplication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreacionPostulacionOferta"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Postulacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getUserProfile": {
+      "get": {
+        "tags": [
+          "perfil-usuario-controller"
+        ],
+        "operationId": "getUserProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilUsuarioData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilUsuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getOffer": {
+      "get": {
+        "tags": [
+          "oferta-empleo-controller"
+        ],
+        "operationId": "getOffer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfertaEmpleoData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfertaEmpleo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getCompanyProfile": {
+      "get": {
+        "tags": [
+          "perfil-empresa-controller"
+        ],
+        "operationId": "getCompanyProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilEmpresaData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilEmpresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getApplication": {
+      "get": {
+        "tags": [
+          "postulacion-controller"
+        ],
+        "operationId": "getApplication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreacionPostulacionOferta"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Postulacion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deleteUserProfile": {
+      "delete": {
+        "tags": [
+          "perfil-usuario-controller"
+        ],
+        "operationId": "deleteUserProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilUsuarioData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/deleteOffer": {
+      "delete": {
+        "tags": [
+          "oferta-empleo-controller"
+        ],
+        "operationId": "deleteOffer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OfertaEmpleoData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/deleteCompanyProfile": {
+      "delete": {
+        "tags": [
+          "perfil-empresa-controller"
+        ],
+        "operationId": "deleteCompanyProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilEmpresaData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/deleteApplication": {
+      "delete": {
+        "tags": [
+          "postulacion-controller"
+        ],
+        "operationId": "deleteApplication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreacionPostulacionOferta"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PerfilUsuarioData": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "documento": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "nombreEmpresaActual": {
+            "type": "string"
+          },
+          "idEmpresaActual": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ExperienciaUsuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "empresa": {
+            "type": "string"
+          },
+          "cargo": {
+            "type": "string"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PerfilEmpresa": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "idEmpresa": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reclutadores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PerfilUsuario"
+            }
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "industria": {
+            "type": "string"
+          },
+          "numeroTrabajadores": {
+            "type": "string"
+          }
+        }
+      },
+      "PerfilUsuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "documento": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "habilidades": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "empresaActual": {
+            "$ref": "#/components/schemas/PerfilEmpresa"
+          },
+          "experiencia": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExperienciaUsuario"
+            }
+          },
+          "proyectos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProyectoUsuario"
+            }
+          },
+          "recomendaciones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recomendacion"
+            }
+          }
+        }
+      },
+      "ProyectoUsuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nombreProyecto": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Recomendacion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "usuario": {
+            "$ref": "#/components/schemas/PerfilUsuario"
+          },
+          "recomendador": {
+            "$ref": "#/components/schemas/PerfilUsuario"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "detalleRecomendacion": {
+            "type": "string"
+          }
+        }
+      },
+      "OfertaEmpleoData": {
+        "type": "object",
+        "properties": {
+          "nombreEmpresa": {
+            "type": "string"
+          },
+          "nombreReclutador": {
+            "type": "string"
+          },
+          "correoReclutador": {
+            "type": "string"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "modalidad": {
+            "type": "string"
+          },
+          "estadoOferta": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "habilidadesRequeridas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "idOferta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idEmpresa": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "OfertaEmpleo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "idOferta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresa": {
+            "$ref": "#/components/schemas/PerfilEmpresa"
+          },
+          "reclutador": {
+            "$ref": "#/components/schemas/PerfilUsuario"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "modalidad": {
+            "type": "string"
+          },
+          "estadoOferta": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "habilidadesRequeridas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PerfilEmpresaData": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "industria": {
+            "type": "string"
+          },
+          "numeroTrabajadores": {
+            "type": "string"
+          },
+          "idEmpresa": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreacionPostulacionOferta": {
+        "type": "object",
+        "properties": {
+          "idCandidato": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idOferta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "estadoPostulacion": {
+            "type": "string"
+          },
+          "fechaPostulacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "urlCurriculum": {
+            "type": "string"
+          }
+        }
+      },
+      "Postulacion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "candidato": {
+            "$ref": "#/components/schemas/PerfilUsuario"
+          },
+          "oferta": {
+            "$ref": "#/components/schemas/OfertaEmpleo"
+          },
+          "estadoPostulacion": {
+            "type": "string"
+          },
+          "fechaPostulacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "urlCurriculum": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

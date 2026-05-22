@@ -22,7 +22,7 @@ public class PerfilEmpresa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private int idEmpresa;
     @OneToMany(fetch = FetchType.LAZY)
     private List<PerfilUsuario> reclutadores;

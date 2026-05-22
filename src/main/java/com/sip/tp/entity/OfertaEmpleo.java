@@ -22,7 +22,7 @@ public class OfertaEmpleo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private int idOferta;
     @OneToOne
     private PerfilEmpresa empresa;
