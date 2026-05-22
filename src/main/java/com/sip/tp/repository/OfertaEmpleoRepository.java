@@ -12,5 +12,6 @@ public interface OfertaEmpleoRepository extends JpaRepository<OfertaEmpleo, UUID
     List<OfertaEmpleo> findAllByEmpresa(PerfilEmpresa empresa);
 
     OfertaEmpleo findOfertaEmpleoByIdOferta(int idOferta);
+
     List<OfertaEmpleo> findAllByReclutador(PerfilUsuario reclutador);
 }

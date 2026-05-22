@@ -1,56 +1,49 @@
 package com.sip.tp.service;
 
-import com.sip.tp.entity.OfertaEmpleo;
-import com.sip.tp.entity.PerfilEmpresa;
 import com.sip.tp.entity.PerfilUsuario;
 import com.sip.tp.entity.Recomendacion;
-import com.sip.tp.model.OfertaEmpleoData;
-import com.sip.tp.repository.OfertaEmpleoRepository;
-import com.sip.tp.repository.PerfilEmpresaRepository;
+import com.sip.tp.model.CreacionRecomendacion;
 import com.sip.tp.repository.PerfilUsuarioRepository;
 import com.sip.tp.repository.RecomendacionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class RecomendacionService {
-    private final OfertaEmpleoRepository ofertaEmpleoRepository;
-    private final PerfilEmpresaRepository perfilEmpresaRepository;
     private final PerfilUsuarioRepository perfilUsuarioRepository;
+    private final RecomendacionRepository recomendacionRepository;
 
-    //TODO Finish this service
-    public OfertaEmpleo saveOffer(OfertaEmpleoData ofertaEmpleoData) {
-        PerfilEmpresa perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByIdEmpresa(ofertaEmpleoData.idEmpresa());
-        PerfilUsuario perfilUsuario = perfilUsuarioRepository.findPerfilUsuarioByEmail(ofertaEmpleoData.correoReclutador());
-        return ofertaEmpleoRepository.save(new OfertaEmpleo(perfilEmpresa,
-                perfilUsuario,
-                ofertaEmpleoData.titulo(),
-                ofertaEmpleoData.modalidad(),
-                ofertaEmpleoData.descripcion(),
-                ofertaEmpleoData.habilidadesRequeridas()));
+    public Recomendacion saveRecommendation(CreacionRecomendacion creacionRecomendacion) {
+        PerfilUsuario usuario = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.usuarioId());
+        PerfilUsuario recomendador = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.recomendadorId());
+        return recomendacionRepository.save(new Recomendacion(usuario, recomendador, creacionRecomendacion.detalleRecomendacion()));
     }
 
-    public OfertaEmpleo updateOffer(OfertaEmpleoData ofertaEmpleoData) {
-        OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(ofertaEmpleoData.idOferta());
-        if (ofertaEmpleo != null) {
-            ofertaEmpleo.setEstadoOferta(ofertaEmpleoData.estadoOferta());
-            ofertaEmpleo.setDescripcion(ofertaEmpleoData.descripcion());
-            ofertaEmpleo.setHabilidadesRequeridas(ofertaEmpleoData.habilidadesRequeridas());
-            ofertaEmpleo.setModalidad(ofertaEmpleoData.modalidad());
-            return ofertaEmpleoRepository.save(ofertaEmpleo);
+    public Recomendacion updateRecommendation(CreacionRecomendacion creacionRecomendacion) {
+        PerfilUsuario usuario = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.usuarioId());
+        PerfilUsuario recomendador = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.recomendadorId());
+        Recomendacion recomendacion = recomendacionRepository.findRecomendacionByUsuarioAndRecomendadorEquals(usuario, recomendador);
+        if (recomendacion != null) {
+            recomendacion.setDetalleRecomendacion(creacionRecomendacion.detalleRecomendacion());
+            return recomendacionRepository.save(recomendacion);
         }
         throw new RuntimeException("Perfil de usuario no encontrado");
     }
 
-    public OfertaEmpleo findOfferByTitle(OfertaEmpleoData ofertaEmpleoData) {
-        return ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(ofertaEmpleoData.idOferta());
+    public List<Recomendacion> findRecommendationsByUser(CreacionRecomendacion creacionRecomendacion) {
+        PerfilUsuario usuario = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.usuarioId());
+        return recomendacionRepository.findAllByUsuario(usuario);
     }
 
-    public void deleteOffer(OfertaEmpleoData ofertaEmpleoData) {
-        OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(ofertaEmpleoData.idOferta());
-        if (ofertaEmpleo != null) {
-            ofertaEmpleoRepository.delete(ofertaEmpleo);
+    public void deleteRecommendation(CreacionRecomendacion creacionRecomendacion) {
+        PerfilUsuario usuario = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.usuarioId());
+        PerfilUsuario recomendador = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(creacionRecomendacion.recomendadorId());
+        Recomendacion recomendacion = recomendacionRepository.findRecomendacionByUsuarioAndRecomendadorEquals(usuario, recomendador);
+        if (recomendacion != null) {
+            recomendacionRepository.delete(recomendacion);
         } else {
             throw new RuntimeException("Oferta de empleo no encontrada");
         }

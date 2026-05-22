@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Recomendacion {
     @Id
@@ -25,6 +27,13 @@ public class Recomendacion {
     private PerfilUsuario recomendador;
     private String estado;
     private String detalleRecomendacion;
+
+    public Recomendacion(PerfilUsuario usuario, PerfilUsuario recomendador, String detalleRecomendacion) {
+        this.usuario = usuario;
+        this.recomendador = recomendador;
+        this.estado = "Pendiente";
+        this.detalleRecomendacion = detalleRecomendacion;
+    }
 
     @Override
     public boolean equals(Object o) {

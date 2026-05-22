@@ -1,6 +1,5 @@
 package com.sip.tp.service;
 
-import com.sip.tp.entity.OfertaEmpleo;
 import com.sip.tp.entity.PerfilEmpresa;
 import com.sip.tp.entity.PerfilUsuario;
 import com.sip.tp.model.PerfilUsuarioData;

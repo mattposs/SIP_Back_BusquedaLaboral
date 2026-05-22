@@ -10,5 +10,6 @@ import java.util.UUID;
 
 public interface PostulacionRepository extends JpaRepository<Postulacion, UUID> {
     Postulacion findPostulacionByCandidatoAndOfertaEquals(PerfilUsuario candidato, OfertaEmpleo oferta);
+
     List<Postulacion> findAllByOfertaEquals(OfertaEmpleo oferta);
 }

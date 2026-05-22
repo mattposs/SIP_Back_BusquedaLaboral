@@ -1,8 +1,8 @@
 package com.sip.tp.service;
 
 import com.sip.tp.entity.OfertaEmpleo;
-import com.sip.tp.entity.Postulacion;
 import com.sip.tp.entity.PerfilUsuario;
+import com.sip.tp.entity.Postulacion;
 import com.sip.tp.model.CreacionPostulacionOferta;
 import com.sip.tp.repository.OfertaEmpleoRepository;
 import com.sip.tp.repository.PerfilUsuarioRepository;
