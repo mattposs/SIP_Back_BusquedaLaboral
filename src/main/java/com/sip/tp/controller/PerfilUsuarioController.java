@@ -5,7 +5,8 @@ import com.sip.tp.model.PerfilUsuarioData;
 import com.sip.tp.service.PerfilUsuarioService;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("v1/perfiles/candidatos")
+@RestController
+@RequestMapping("v1/perfiles/candidatos")
 public class PerfilUsuarioController {
     private final PerfilUsuarioService perfilUsuarioService;
 

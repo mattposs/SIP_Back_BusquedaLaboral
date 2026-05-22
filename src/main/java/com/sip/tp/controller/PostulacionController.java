@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("v1/postulaciones")
+@RestController
+@RequestMapping("v1/postulaciones")
 public class PostulacionController {
     private final PostulacionService postulacionService;
 

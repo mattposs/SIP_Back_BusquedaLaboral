@@ -1,21 +1,38 @@
 package com.sip.tp.controller;
 
 import com.sip.tp.entity.Recomendacion;
-import com.sip.tp.repository.RecomendacionRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.sip.tp.model.CreacionRecomendacion;
+import com.sip.tp.service.RecomendacionService;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("v1/recomendaciones")
+import java.util.List;
+
+@RestController
+@RequestMapping("v1/recomendaciones")
 public class RecomendacionController {
-    private final RecomendacionRepository RecomendacionRepository;
+    private final RecomendacionService recomendacionService;
 
-    public RecomendacionController(RecomendacionRepository RecomendacionRepository) {
-        this.RecomendacionRepository = RecomendacionRepository;
+    public RecomendacionController(RecomendacionService recomendacionService) {
+        this.recomendacionService = recomendacionService;
     }
 
     @PostMapping("/saveRecommendation")
-    public Recomendacion saveRecommendation(@RequestBody Recomendacion recomendacion) {
-        return RecomendacionRepository.save(recomendacion);
+    public Recomendacion saveRecommendation(@RequestBody CreacionRecomendacion recomendacionData) {
+        return recomendacionService.saveRecommendation(recomendacionData);
+    }
+
+    @PutMapping("/updateRecommendation")
+    public Recomendacion updateRecommendation(@RequestBody CreacionRecomendacion recomendacionData) {
+        return recomendacionService.updateRecommendation(recomendacionData);
+    }
+
+    @GetMapping("/getRecommendation")
+    public List<Recomendacion> getRecommendation(@RequestBody CreacionRecomendacion recomendacionData) {
+        return recomendacionService.findRecommendationsByUser(recomendacionData);
+    }
+
+    @DeleteMapping("/deleteRecommendation")
+    public void deleteRecommendation(@RequestBody CreacionRecomendacion recomendacionData) {
+        recomendacionService.deleteRecommendation(recomendacionData);
     }
 }
