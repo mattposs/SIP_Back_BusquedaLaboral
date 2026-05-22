@@ -32,11 +32,11 @@ public class PerfilUsuario {
     @Nullable
     @ManyToOne(fetch = FetchType.LAZY)
     private PerfilEmpresa empresaActual;
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ExperienciaUsuario> experiencia;
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ProyectoUsuario> proyectos;
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Recomendacion> recomendaciones;
 
     public PerfilUsuario(String nombre, String apellido, String documento, String email, String titulo, PerfilEmpresa empresaActual) {

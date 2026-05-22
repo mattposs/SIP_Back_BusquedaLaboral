@@ -13,23 +13,23 @@ public class PerfilUsuarioController {
         this.perfilUsuarioService = perfilUsuarioService;
     }
 
-    @PostMapping
-    public PerfilUsuario save(@RequestBody PerfilUsuarioData perfilUsuario) {
+    @PostMapping("/saveUserProfile")
+    public PerfilUsuario saveUserProfile(@RequestBody PerfilUsuarioData perfilUsuario) {
         return perfilUsuarioService.saveProfile(perfilUsuario);
     }
 
-    @PutMapping
-    public PerfilUsuario update(@RequestBody PerfilUsuarioData perfilUsuario) {
+    @PutMapping("/updateUserProfile")
+    public PerfilUsuario updateUserProfile(@RequestBody PerfilUsuarioData perfilUsuario) {
         return perfilUsuarioService.updateProfile(perfilUsuario);
     }
 
-    @GetMapping
-    public PerfilUsuario get(@RequestBody PerfilUsuarioData perfilUsuario) {
+    @GetMapping("/getUserProfile")
+    public PerfilUsuario getUserProfile(@RequestBody PerfilUsuarioData perfilUsuario) {
         return perfilUsuarioService.findPerfilUsuarioByDocumento(perfilUsuario);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody PerfilUsuarioData perfilUsuario) {
+    @DeleteMapping("/deleteUserProfile")
+    public void deleteUserProfile(@RequestBody PerfilUsuarioData perfilUsuario) {
         perfilUsuarioService.deleteProfile(perfilUsuario);
     }
 }

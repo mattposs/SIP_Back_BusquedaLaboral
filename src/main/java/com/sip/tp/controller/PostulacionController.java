@@ -14,8 +14,8 @@ public class PostulacionController {
         this.PostulacionRepository = PostulacionRepository;
     }
 
-    @PostMapping
-    public Postulacion save(@RequestBody Postulacion postulacion) {
+    @PostMapping("/saveApplication")
+    public Postulacion saveApplication(@RequestBody Postulacion postulacion) {
         return PostulacionRepository.save(postulacion);
     }
 }

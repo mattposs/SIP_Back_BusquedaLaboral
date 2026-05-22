@@ -13,23 +13,23 @@ public class PerfilEmpresaController {
         this.perfilEmpresaService = perfilEmpresaService;
     }
 
-    @PostMapping
-    public PerfilEmpresa save(@RequestBody PerfilEmpresaData perfilEmpresa) {
+    @PostMapping("/saveCompanyProfile")
+    public PerfilEmpresa saveCompanyProfile(@RequestBody PerfilEmpresaData perfilEmpresa) {
         return perfilEmpresaService.saveProfile(perfilEmpresa);
     }
 
-    @PutMapping
-    public PerfilEmpresa update(@RequestBody PerfilEmpresaData perfilEmpresa) {
+    @PutMapping("/updateCompanyProfile")
+    public PerfilEmpresa updateCompanyProfile(@RequestBody PerfilEmpresaData perfilEmpresa) {
         return perfilEmpresaService.updateProfile(perfilEmpresa);
     }
 
-    @GetMapping
-    public PerfilEmpresa get(@RequestBody PerfilEmpresaData perfilEmpresa) {
+    @GetMapping("/getCompanyProfile")
+    public PerfilEmpresa getCompanyProfile(@RequestBody PerfilEmpresaData perfilEmpresa) {
         return perfilEmpresaService.findPerfilEmpresaByNombre(perfilEmpresa);
     }
 
-    @DeleteMapping
-    public void delete(@RequestBody PerfilEmpresaData perfilEmpresa) {
+    @DeleteMapping("/deleteCompanyProfile")
+    public void deleteCompanyProfile(@RequestBody PerfilEmpresaData perfilEmpresa) {
         perfilEmpresaService.deleteProfile(perfilEmpresa);
     }
 }
