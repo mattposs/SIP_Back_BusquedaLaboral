@@ -19,7 +19,6 @@ public class PostulacionService {
     private final PostulacionRepository postulacionRepository;
     private final PerfilUsuarioRepository perfilUsuarioRepository;
 
-    //TODO Finish this service
     public Postulacion saveApplication(CreacionPostulacionOferta postulacion) {
         OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(postulacion.idOferta());
         PerfilUsuario perfilUsuario = perfilUsuarioRepository.findPerfilUsuarioByIdUsuario(postulacion.idCandidato());
