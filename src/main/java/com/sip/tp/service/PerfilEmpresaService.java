@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 public class PerfilEmpresaService {
     private final PerfilEmpresaRepository perfilEmpresaRepository;
 
-    public PerfilEmpresa saveProfile(PerfilEmpresaData PerfilEmpresaData) {
-        return perfilEmpresaRepository.save(new PerfilEmpresa(PerfilEmpresaData.nombre(),
-                PerfilEmpresaData.industria(),
-                PerfilEmpresaData.numeroTrabajadores()));
+    public PerfilEmpresa saveProfile(PerfilEmpresaData perfilEmpresaData) {
+        return perfilEmpresaRepository.save(new PerfilEmpresa(perfilEmpresaData.nombre(),
+                perfilEmpresaData.industria(),
+                perfilEmpresaData.numeroTrabajadores()));
     }
 
     public PerfilEmpresa updateProfile(PerfilEmpresaData perfilEmpresaData) {
-        PerfilEmpresa empresa = perfilEmpresaRepository.findPerfilEmpresaByNombreEquals(perfilEmpresaData.nombre());
+        PerfilEmpresa empresa = perfilEmpresaRepository.findPerfilEmpresaByIdEmpresa(perfilEmpresaData.idEmpresa());
         if (empresa != null) {
             empresa.setNombre(perfilEmpresaData.nombre());
             empresa.setIndustria(perfilEmpresaData.industria());
@@ -28,12 +28,12 @@ public class PerfilEmpresaService {
         throw new RuntimeException("Perfil de usuario no encontrado");
     }
 
-    public PerfilEmpresa findPerfilEmpresaByNombre(PerfilEmpresaData PerfilEmpresaData) {
-        return perfilEmpresaRepository.findPerfilEmpresaByNombreEquals(PerfilEmpresaData.nombre());
+    public PerfilEmpresa findPerfilEmpresaByNombre(PerfilEmpresaData perfilEmpresaData) {
+        return perfilEmpresaRepository.findPerfilEmpresaByIdEmpresa(perfilEmpresaData.idEmpresa());
     }
 
-    public void deleteProfile(PerfilEmpresaData PerfilEmpresaData) {
-        PerfilEmpresa empresa = findPerfilEmpresaByNombre(PerfilEmpresaData);
+    public void deleteProfile(PerfilEmpresaData perfilEmpresaData) {
+        PerfilEmpresa empresa = findPerfilEmpresaByNombre(perfilEmpresaData);
         if (empresa != null) {
             perfilEmpresaRepository.delete(empresa);
         } else {

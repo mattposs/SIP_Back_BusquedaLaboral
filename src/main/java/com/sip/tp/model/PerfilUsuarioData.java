@@ -6,6 +6,7 @@ public record PerfilUsuarioData(
         String documento,
         String email,
         String titulo,
-        String nombreEmpresaActual
+        String nombreEmpresaActual,
+        int idEmpresaActual
 ) {
 }

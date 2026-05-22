@@ -23,6 +23,8 @@ public class PerfilUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int idUsuario;
     private String nombre;
     private String apellido;
     private String documento;

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface PerfilEmpresaRepository extends JpaRepository<PerfilEmpresa, UUID> {
-    PerfilEmpresa findPerfilEmpresaByNombreEquals(String nombre);
+    PerfilEmpresa findPerfilEmpresaByIdEmpresa(int idEmpresa);
 }

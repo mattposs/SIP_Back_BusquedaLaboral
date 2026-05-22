@@ -22,6 +22,8 @@ public class OfertaEmpleo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int idOferta;
     @OneToOne
     private PerfilEmpresa empresa;
     @ManyToOne
@@ -62,6 +64,7 @@ public class OfertaEmpleo {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
                 .append("id", id)
+                .append("idOferta", idOferta)
                 .append("empresa", empresa)
                 .append("reclutador", reclutador)
                 .append("titulo", titulo)

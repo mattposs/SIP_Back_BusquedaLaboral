@@ -10,5 +10,7 @@ import java.util.UUID;
 
 public interface OfertaEmpleoRepository extends JpaRepository<OfertaEmpleo, UUID> {
     List<OfertaEmpleo> findAllByEmpresa(PerfilEmpresa empresa);
-    OfertaEmpleo findOfertaEmpleoByTituloAndReclutador(String titulo, PerfilUsuario reclutador);
+
+    OfertaEmpleo findOfertaEmpleoByIdOferta(int idOferta);
+    List<OfertaEmpleo> findAllByReclutador(PerfilUsuario reclutador);
 }

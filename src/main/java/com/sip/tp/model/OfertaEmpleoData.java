@@ -10,6 +10,8 @@ public record OfertaEmpleoData(
         String modalidad,
         String estadoOferta,
         String descripcion,
-        List<String> habilidadesRequeridas
+        List<String> habilidadesRequeridas,
+        int idOferta,
+        int idEmpresa
 ) {
 }

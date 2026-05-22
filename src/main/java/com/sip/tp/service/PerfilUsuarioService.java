@@ -16,7 +16,7 @@ public class PerfilUsuarioService {
     private final PerfilEmpresaRepository perfilEmpresaRepository;
 
     public PerfilUsuario saveProfile(PerfilUsuarioData perfilUsuarioData) {
-        PerfilEmpresa empresa = perfilEmpresaRepository.findPerfilEmpresaByNombreEquals(perfilUsuarioData.nombreEmpresaActual());
+        PerfilEmpresa empresa = perfilEmpresaRepository.findPerfilEmpresaByIdEmpresa(perfilUsuarioData.idEmpresaActual());
         return perfilUsuarioRepository.save(new PerfilUsuario(perfilUsuarioData.nombre(),
                 perfilUsuarioData.apellido(),
                 perfilUsuarioData.documento(),
@@ -27,7 +27,7 @@ public class PerfilUsuarioService {
 
     public PerfilUsuario updateProfile(PerfilUsuarioData perfilUsuarioData) {
         PerfilUsuario perfilUsuario = perfilUsuarioRepository.findPerfilUsuarioByDocumento(perfilUsuarioData.documento());
-        PerfilEmpresa empresa = perfilEmpresaRepository.findPerfilEmpresaByNombreEquals(perfilUsuarioData.nombreEmpresaActual());
+        PerfilEmpresa empresa = perfilEmpresaRepository.findPerfilEmpresaByIdEmpresa(perfilUsuarioData.idEmpresaActual());
         if (perfilUsuario != null) {
             perfilUsuario.setNombre(perfilUsuarioData.nombre());
             perfilUsuario.setApellido(perfilUsuarioData.apellido());

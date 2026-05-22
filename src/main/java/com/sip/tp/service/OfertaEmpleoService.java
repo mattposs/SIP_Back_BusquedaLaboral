@@ -18,7 +18,7 @@ public class OfertaEmpleoService {
     private final PerfilUsuarioRepository perfilUsuarioRepository;
 
     public OfertaEmpleo saveOffer(OfertaEmpleoData ofertaEmpleoData) {
-        PerfilEmpresa perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByNombreEquals(ofertaEmpleoData.nombreEmpresa());
+        PerfilEmpresa perfilEmpresa = perfilEmpresaRepository.findPerfilEmpresaByIdEmpresa(ofertaEmpleoData.idEmpresa());
         PerfilUsuario perfilUsuario = perfilUsuarioRepository.findPerfilUsuarioByEmail(ofertaEmpleoData.correoReclutador());
         return ofertaEmpleoRepository.save(new OfertaEmpleo(perfilEmpresa,
                 perfilUsuario,
@@ -29,8 +29,7 @@ public class OfertaEmpleoService {
     }
 
     public OfertaEmpleo updateOffer(OfertaEmpleoData ofertaEmpleoData) {
-        PerfilUsuario reclutador = perfilUsuarioRepository.findPerfilUsuarioByEmail(ofertaEmpleoData.correoReclutador());
-        OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByTituloAndReclutador(ofertaEmpleoData.titulo(), reclutador);
+        OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(ofertaEmpleoData.idOferta());
         if (ofertaEmpleo != null) {
             ofertaEmpleo.setEstadoOferta(ofertaEmpleoData.estadoOferta());
             ofertaEmpleo.setDescripcion(ofertaEmpleoData.descripcion());
@@ -42,13 +41,11 @@ public class OfertaEmpleoService {
     }
 
     public OfertaEmpleo findOfferByTitle(OfertaEmpleoData ofertaEmpleoData) {
-        PerfilUsuario reclutador = perfilUsuarioRepository.findPerfilUsuarioByEmail(ofertaEmpleoData.correoReclutador());
-        return ofertaEmpleoRepository.findOfertaEmpleoByTituloAndReclutador(ofertaEmpleoData.titulo(), reclutador);
+        return ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(ofertaEmpleoData.idOferta());
     }
 
     public void deleteOffer(OfertaEmpleoData ofertaEmpleoData) {
-        PerfilUsuario reclutador = perfilUsuarioRepository.findPerfilUsuarioByEmail(ofertaEmpleoData.correoReclutador());
-        OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByTituloAndReclutador(ofertaEmpleoData.titulo(), reclutador);
+        OfertaEmpleo ofertaEmpleo = ofertaEmpleoRepository.findOfertaEmpleoByIdOferta(ofertaEmpleoData.idOferta());
         if (ofertaEmpleo != null) {
             ofertaEmpleoRepository.delete(ofertaEmpleo);
         } else {
