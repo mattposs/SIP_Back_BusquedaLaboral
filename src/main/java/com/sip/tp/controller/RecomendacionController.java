@@ -14,8 +14,8 @@ public class RecomendacionController {
         this.RecomendacionRepository = RecomendacionRepository;
     }
 
-    @PostMapping
-    public Recomendacion save(@RequestBody Recomendacion recomendacion) {
+    @PostMapping("/saveRecommendation")
+    public Recomendacion saveRecommendation(@RequestBody Recomendacion recomendacion) {
         return RecomendacionRepository.save(recomendacion);
     }
 }

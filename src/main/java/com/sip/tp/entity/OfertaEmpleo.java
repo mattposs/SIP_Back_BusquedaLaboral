@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,20 +16,33 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class OfertaEmpleo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    private int idOferta;
     @OneToOne
     private PerfilEmpresa empresa;
     @ManyToOne
-    private PerfilReclutador reclutador;
+    private PerfilUsuario reclutador;
     private String titulo;
     private String modalidad;
     private String estadoOferta;
     private String descripcion;
     private List<String> habilidadesRequeridas;
+
+    public OfertaEmpleo(PerfilEmpresa empresa, PerfilUsuario reclutador, String titulo, String modalidad, String descripcion, List<String> habilidadesRequeridas) {
+        this.empresa = empresa;
+        this.reclutador = reclutador;
+        this.titulo = titulo;
+        this.modalidad = modalidad;
+        this.estadoOferta = "Disponible";
+        this.descripcion = descripcion;
+        this.habilidadesRequeridas = habilidadesRequeridas;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -50,6 +64,7 @@ public class OfertaEmpleo {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
                 .append("id", id)
+                .append("idOferta", idOferta)
                 .append("empresa", empresa)
                 .append("reclutador", reclutador)
                 .append("titulo", titulo)

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Postulacion {
     @Id
@@ -27,6 +29,14 @@ public class Postulacion {
     private String estadoPostulacion;
     private LocalDateTime fechaPostulacion;
     private String urlCurriculum;
+
+    public Postulacion(PerfilUsuario candidato, OfertaEmpleo oferta, String urlCurriculum) {
+        this.candidato = candidato;
+        this.oferta = oferta;
+        this.estadoPostulacion = "Enviada";
+        this.fechaPostulacion = LocalDateTime.now();
+        this.urlCurriculum = urlCurriculum;
+    }
 
     @Override
     public boolean equals(Object o) {

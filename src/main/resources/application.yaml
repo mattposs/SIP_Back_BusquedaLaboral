@@ -2,12 +2,14 @@ spring:
   application:
     name: tp
   datasource:
-    url: jdbc:postgresql://localhost:5432/tp
+    url: jdbc:postgresql://localhost:5432/postgres
     username: user
-    password: password
+    password: secret
+  threads:
+    virtual:
+      enabled: true
   jpa:
-    hibernate:
-      ddl-auto: validate
+    generate-ddl: true
 
 management:
   otlp:

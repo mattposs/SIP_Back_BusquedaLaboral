@@ -1,21 +1,37 @@
 package com.sip.tp.controller;
 
 import com.sip.tp.entity.Postulacion;
-import com.sip.tp.repository.PostulacionRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.sip.tp.model.CreacionPostulacionOferta;
+import com.sip.tp.service.PostulacionService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController("v1/postulaciones")
 public class PostulacionController {
-    private final PostulacionRepository PostulacionRepository;
+    private final PostulacionService postulacionService;
 
-    public PostulacionController(PostulacionRepository PostulacionRepository) {
-        this.PostulacionRepository = PostulacionRepository;
+    public PostulacionController(PostulacionService postulacionService) {
+        this.postulacionService = postulacionService;
     }
 
-    @PostMapping
-    public Postulacion save(@RequestBody Postulacion postulacion) {
-        return PostulacionRepository.save(postulacion);
+    @PostMapping("/saveApplication")
+    public Postulacion saveApplication(@RequestBody CreacionPostulacionOferta postulacionData) {
+        return postulacionService.saveApplication(postulacionData);
+    }
+
+    @PutMapping("/updateApplication")
+    public Postulacion updateApplication(@RequestBody CreacionPostulacionOferta postulacionData) {
+        return postulacionService.updateApplication(postulacionData);
+    }
+
+    @GetMapping("/getApplication")
+    public List<Postulacion> getApplication(@RequestBody CreacionPostulacionOferta postulacionData) {
+        return postulacionService.findApplicationByTitle(postulacionData);
+    }
+
+    @DeleteMapping("/deleteApplication")
+    public void deleteApplication(@RequestBody CreacionPostulacionOferta postulacionData) {
+        postulacionService.deleteApplication(postulacionData);
     }
 }

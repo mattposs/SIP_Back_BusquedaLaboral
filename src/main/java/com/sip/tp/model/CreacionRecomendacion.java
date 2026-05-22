@@ -1,9 +1,9 @@
 package com.sip.tp.model;
 
 public record CreacionRecomendacion(
-        String correoUsuario,
-        String correoRecomendador,
+        int usuarioId,
+        int recomendadorId,
         String estado,
-        String textoRecomendacion
+        String detalleRecomendacion
 ) {
 }

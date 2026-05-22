@@ -1,21 +1,35 @@
 package com.sip.tp.controller;
 
 import com.sip.tp.entity.OfertaEmpleo;
-import com.sip.tp.repository.OfertaEmpleoRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.sip.tp.model.OfertaEmpleoData;
+import com.sip.tp.service.OfertaEmpleoService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("v1/oferta")
 public class OfertaEmpleoController {
-    private final OfertaEmpleoRepository ofertaEmpleoRepository;
+    private final OfertaEmpleoService ofertaEmpleoService;
 
-    public OfertaEmpleoController(OfertaEmpleoRepository ofertaEmpleoRepository) {
-        this.ofertaEmpleoRepository = ofertaEmpleoRepository;
+    public OfertaEmpleoController(OfertaEmpleoService perfilUsuarioService) {
+        this.ofertaEmpleoService = perfilUsuarioService;
     }
 
-    @PostMapping
-    public OfertaEmpleo save(@RequestBody OfertaEmpleo ofertaEmpleo) {
-        return ofertaEmpleoRepository.save(ofertaEmpleo);
+    @PostMapping("/saveOffer")
+    public OfertaEmpleo saveOffer(@RequestBody OfertaEmpleoData perfilUsuario) {
+        return ofertaEmpleoService.saveOffer(perfilUsuario);
+    }
+
+    @PutMapping("/updateOffer")
+    public OfertaEmpleo updateOffer(@RequestBody OfertaEmpleoData perfilUsuario) {
+        return ofertaEmpleoService.updateOffer(perfilUsuario);
+    }
+
+    @GetMapping("/getOffer")
+    public OfertaEmpleo getOffer(@RequestBody OfertaEmpleoData perfilUsuario) {
+        return ofertaEmpleoService.findOfferByTitle(perfilUsuario);
+    }
+
+    @DeleteMapping("/deleteOffer")
+    public void deleteOffer(@RequestBody OfertaEmpleoData perfilUsuario) {
+        ofertaEmpleoService.deleteOffer(perfilUsuario);
     }
 }

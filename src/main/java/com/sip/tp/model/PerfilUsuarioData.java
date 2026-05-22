@@ -1,10 +1,12 @@
 package com.sip.tp.model;
 
-public record RegistroPerfilUsuario(
+public record PerfilUsuarioData(
         String nombre,
         String apellido,
         String documento,
         String email,
-        String titulo
+        String titulo,
+        String nombreEmpresaActual,
+        int idEmpresaActual
 ) {
 }
