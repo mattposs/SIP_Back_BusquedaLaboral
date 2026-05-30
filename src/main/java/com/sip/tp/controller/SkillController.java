@@ -1,0 +1,60 @@
+package com.sip.tp.controller;
+
+
+import com.sip.tp.model.AddSkillRequest;
+import com.sip.tp.service.SkillService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequiredArgsConstructor
+@Tag(name = "Skills", description = "Skill catalog and candidate skill management")
+public class SkillController {
+
+    private final SkillService skillService;
+
+    @GetMapping("/skills")
+    @Operation(summary = "Search skill catalog")
+    public ResponseEntity<List<Object>> searchSkills(@RequestParam(required = false, defaultValue = "") String search) {
+        return ResponseEntity.ok(Collections.singletonList(skillService.searchCatalog(search)));
+    }
+
+    @GetMapping("/skills/suggestions")
+    @Operation(summary = "Get suggested skills based on role")
+    public ResponseEntity<List<Object>> getSuggestedSkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(Collections.singletonList(skillService.getSuggestedSkillsForCandidate(candidateId)));
+    }
+
+    @GetMapping("/candidates/me/skills")
+    @Operation(summary = "List own skills with levels and scores")
+    public ResponseEntity<List<Object>> getMySkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(Collections.singletonList(skillService.getCandidateSkills(candidateId)));
+    }
+
+    @PostMapping("/candidates/me/skills")
+    @Operation(summary = "Add a skill to profile")
+    public ResponseEntity<Void> addSkill(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
+            @RequestBody AddSkillRequest request) {
+        skillService.addSkillToCandidate(candidateId, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/candidates/me/skills/{id}")
+    @Operation(summary = "Remove a skill from profile")
+    public ResponseEntity<Void> removeSkill(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
+            @PathVariable UUID id) {
+        skillService.removeSkillFromCandidate(candidateId, id);
+        return ResponseEntity.noContent().build();
+    }
+}

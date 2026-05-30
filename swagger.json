@@ -1,1 +1,1286 @@
-{"openapi":"3.1.0","info":{"title":"OpenAPI definition","version":"v0"},"servers":[{"url":"http://localhost:8080","description":"Generated server url"}],"paths":{"/v1/recomendaciones/updateRecommendation":{"put":{"tags":["recomendacion-controller"],"operationId":"updateRecommendation","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionRecomendacion"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Recomendacion"}}}}}}},"/v1/postulaciones/updateApplication":{"put":{"tags":["postulacion-controller"],"operationId":"updateApplication","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionPostulacionOferta"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Postulacion"}}}}}}},"/v1/perfiles/empresas/updateCompanyProfile":{"put":{"tags":["perfil-empresa-controller"],"operationId":"updateCompanyProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilEmpresaData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/PerfilEmpresa"}}}}}}},"/v1/perfiles/candidatos/updateUserProfile":{"put":{"tags":["perfil-usuario-controller"],"operationId":"updateUserProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilUsuarioData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/PerfilUsuario"}}}}}}},"/v1/oferta/updateOffer":{"put":{"tags":["oferta-empleo-controller"],"operationId":"updateOffer","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/OfertaEmpleoData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/OfertaEmpleo"}}}}}}},"/v1/recomendaciones/saveRecommendation":{"post":{"tags":["recomendacion-controller"],"operationId":"saveRecommendation","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionRecomendacion"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Recomendacion"}}}}}}},"/v1/postulaciones/saveApplication":{"post":{"tags":["postulacion-controller"],"operationId":"saveApplication","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionPostulacionOferta"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Postulacion"}}}}}}},"/v1/perfiles/empresas/saveCompanyProfile":{"post":{"tags":["perfil-empresa-controller"],"operationId":"saveCompanyProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilEmpresaData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/PerfilEmpresa"}}}}}}},"/v1/perfiles/candidatos/saveUserProfile":{"post":{"tags":["perfil-usuario-controller"],"operationId":"saveUserProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilUsuarioData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/PerfilUsuario"}}}}}}},"/v1/oferta/saveOffer":{"post":{"tags":["oferta-empleo-controller"],"operationId":"saveOffer","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/OfertaEmpleoData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/OfertaEmpleo"}}}}}}},"/v1/recomendaciones/getRecommendation":{"get":{"tags":["recomendacion-controller"],"operationId":"getRecommendation","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionRecomendacion"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Recomendacion"}}}}}}}},"/v1/postulaciones/getApplication":{"get":{"tags":["postulacion-controller"],"operationId":"getApplication","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionPostulacionOferta"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Postulacion"}}}}}}}},"/v1/perfiles/empresas/getCompanyProfile":{"get":{"tags":["perfil-empresa-controller"],"operationId":"getCompanyProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilEmpresaData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/PerfilEmpresa"}}}}}}},"/v1/perfiles/candidatos/getUserProfile":{"get":{"tags":["perfil-usuario-controller"],"operationId":"getUserProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilUsuarioData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/PerfilUsuario"}}}}}}},"/v1/oferta/getOffer":{"get":{"tags":["oferta-empleo-controller"],"operationId":"getOffer","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/OfertaEmpleoData"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/OfertaEmpleo"}}}}}}},"/v1/recomendaciones/deleteRecommendation":{"delete":{"tags":["recomendacion-controller"],"operationId":"deleteRecommendation","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionRecomendacion"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/v1/postulaciones/deleteApplication":{"delete":{"tags":["postulacion-controller"],"operationId":"deleteApplication","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreacionPostulacionOferta"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/v1/perfiles/empresas/deleteCompanyProfile":{"delete":{"tags":["perfil-empresa-controller"],"operationId":"deleteCompanyProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilEmpresaData"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/v1/perfiles/candidatos/deleteUserProfile":{"delete":{"tags":["perfil-usuario-controller"],"operationId":"deleteUserProfile","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PerfilUsuarioData"}}},"required":true},"responses":{"200":{"description":"OK"}}}},"/v1/oferta/deleteOffer":{"delete":{"tags":["oferta-empleo-controller"],"operationId":"deleteOffer","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/OfertaEmpleoData"}}},"required":true},"responses":{"200":{"description":"OK"}}}}},"components":{"schemas":{"CreacionRecomendacion":{"type":"object","properties":{"usuarioId":{"type":"integer","format":"int32"},"recomendadorId":{"type":"integer","format":"int32"},"estado":{"type":"string"},"detalleRecomendacion":{"type":"string"}}},"ExperienciaUsuario":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"empresa":{"type":"string"},"cargo":{"type":"string"},"fechaInicio":{"type":"string","format":"date-time"},"fechaFin":{"type":"string","format":"date-time"}}},"PerfilEmpresa":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"idEmpresa":{"type":"integer","format":"int32"},"reclutadores":{"type":"array","items":{"$ref":"#/components/schemas/PerfilUsuario"}},"nombre":{"type":"string"},"industria":{"type":"string"},"numeroTrabajadores":{"type":"string"}}},"PerfilUsuario":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"idUsuario":{"type":"integer","format":"int32"},"nombre":{"type":"string"},"apellido":{"type":"string"},"documento":{"type":"string"},"email":{"type":"string"},"titulo":{"type":"string"},"habilidades":{"type":"array","items":{"type":"string"}},"empresaActual":{"$ref":"#/components/schemas/PerfilEmpresa"},"experiencia":{"type":"array","items":{"$ref":"#/components/schemas/ExperienciaUsuario"}},"proyectos":{"type":"array","items":{"$ref":"#/components/schemas/ProyectoUsuario"}},"recomendaciones":{"type":"array","items":{"$ref":"#/components/schemas/Recomendacion"}}}},"ProyectoUsuario":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"nombreProyecto":{"type":"string"},"descripcion":{"type":"string"},"url":{"type":"string"}}},"Recomendacion":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"usuario":{"$ref":"#/components/schemas/PerfilUsuario"},"recomendador":{"$ref":"#/components/schemas/PerfilUsuario"},"estado":{"type":"string"},"detalleRecomendacion":{"type":"string"}}},"CreacionPostulacionOferta":{"type":"object","properties":{"idCandidato":{"type":"integer","format":"int32"},"idOferta":{"type":"integer","format":"int32"},"estadoPostulacion":{"type":"string"},"fechaPostulacion":{"type":"string","format":"date-time"},"urlCurriculum":{"type":"string"}}},"OfertaEmpleo":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"idOferta":{"type":"integer","format":"int32"},"empresa":{"$ref":"#/components/schemas/PerfilEmpresa"},"reclutador":{"$ref":"#/components/schemas/PerfilUsuario"},"titulo":{"type":"string"},"modalidad":{"type":"string"},"estadoOferta":{"type":"string"},"descripcion":{"type":"string"},"habilidadesRequeridas":{"type":"array","items":{"type":"string"}}}},"Postulacion":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"candidato":{"$ref":"#/components/schemas/PerfilUsuario"},"oferta":{"$ref":"#/components/schemas/OfertaEmpleo"},"estadoPostulacion":{"type":"string"},"fechaPostulacion":{"type":"string","format":"date-time"},"urlCurriculum":{"type":"string"}}},"PerfilEmpresaData":{"type":"object","properties":{"nombre":{"type":"string"},"industria":{"type":"string"},"numeroTrabajadores":{"type":"string"},"idEmpresa":{"type":"integer","format":"int32"}}},"PerfilUsuarioData":{"type":"object","properties":{"nombre":{"type":"string"},"apellido":{"type":"string"},"documento":{"type":"string"},"email":{"type":"string"},"titulo":{"type":"string"},"nombreEmpresaActual":{"type":"string"},"idEmpresaActual":{"type":"integer","format":"int32"}}},"OfertaEmpleoData":{"type":"object","properties":{"nombreEmpresa":{"type":"string"},"nombreReclutador":{"type":"string"},"correoReclutador":{"type":"string"},"titulo":{"type":"string"},"modalidad":{"type":"string"},"estadoOferta":{"type":"string"},"descripcion":{"type":"string"},"habilidadesRequeridas":{"type":"array","items":{"type":"string"}},"idOferta":{"type":"integer","format":"int32"},"idEmpresa":{"type":"integer","format":"int32"}}}}}}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints for user registration and login"
+    },
+    {
+      "name": "Skills",
+      "description": "Skill catalog and candidate skill management"
+    },
+    {
+      "name": "Matches (Candidate)",
+      "description": "Candidate interactions with matched offers"
+    },
+    {
+      "name": "Company",
+      "description": "Company profile management"
+    },
+    {
+      "name": "Job Offers",
+      "description": "Recruiter endpoints for offer management"
+    },
+    {
+      "name": "Matches (Recruiter)",
+      "description": "Recruiter interactions with matched candidates"
+    },
+    {
+      "name": "Validations",
+      "description": "Peer validation system endpoints"
+    },
+    {
+      "name": "Candidate Profile",
+      "description": "Endpoints for managing the logged-in candidate's profile"
+    },
+    {
+      "name": "Anonymous Messaging",
+      "description": "Double-blind communication between candidates and recruiters"
+    }
+  ],
+  "paths": {
+    "/companies/{id}": {
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "updateCompany",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me": {
+      "get": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Get own profile",
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Update profile fields",
+        "operationId": "updateProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/validations": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Submit a validation (Accept request)",
+        "operationId": "submitValidation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitValidationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/validation-requests/{id}/reject": {
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Reject a validation request",
+        "operationId": "rejectRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/offers": {
+      "post": {
+        "tags": [
+          "Job Offers"
+        ],
+        "operationId": "createOffer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobOfferRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offers/{id}/publish": {
+      "post": {
+        "tags": [
+          "Job Offers"
+        ],
+        "operationId": "publishOffer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/companies": {
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "operationId": "createCompany",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/verify-identity": {
+      "post": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Initiate RENAPER verification",
+        "operationId": "verifyIdentity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyIdentityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/validation-requests": {
+      "get": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Incoming requests asking me to validate others",
+        "operationId": "getIncomingRequests",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "PENDING"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Create a validation request",
+        "operationId": "requestValidation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidationRequestPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me/skills": {
+      "get": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "List own skills with levels and scores",
+        "operationId": "getMySkills",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Add a skill to profile",
+        "operationId": "addSkill",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSkillRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me/projects": {
+      "post": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Add project",
+        "operationId": "addProject",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/photo": {
+      "post": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Upload profile photo",
+        "operationId": "uploadPhoto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/matches/{offerId}/interest": {
+      "post": {
+        "tags": [
+          "Matches (Candidate)"
+        ],
+        "summary": "Mark 'Me interesa' (Triggers profile reveal)",
+        "operationId": "markInterest",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me/matches/{offerId}/decline": {
+      "post": {
+        "tags": [
+          "Matches (Candidate)"
+        ],
+        "summary": "Mark 'No me interesa'",
+        "operationId": "declineInterest",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me/experience": {
+      "post": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Add work experience",
+        "operationId": "addExperience",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkExperienceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Register user",
+        "description": "Registers a new Candidate or Recruiter",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User login",
+        "description": "Authenticates a user and returns a JWT",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/anonymous-threads": {
+      "post": {
+        "tags": [
+          "Anonymous Messaging"
+        ],
+        "summary": "Candidate creates anonymous thread",
+        "operationId": "createThread",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateThreadRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/anonymous-threads/{id}/messages": {
+      "post": {
+        "tags": [
+          "Anonymous Messaging"
+        ],
+        "summary": "Send a message within an existing thread",
+        "operationId": "sendMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Search skill catalog",
+        "operationId": "searchSkills",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills/{skillId}/suggested-validators": {
+      "get": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Get suggested validators for a specific skill",
+        "operationId": "getSuggestedValidators",
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SuggestedValidator"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills/suggestions": {
+      "get": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Get suggested skills based on role",
+        "operationId": "getSuggestedSkills",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offers/{offerId}/candidates": {
+      "get": {
+        "tags": [
+          "Matches (Recruiter)"
+        ],
+        "summary": "List matched candidates for a specific offer",
+        "operationId": "getMatchedCandidatesForOffer",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/offers/{offerId}/anonymous-threads": {
+      "get": {
+        "tags": [
+          "Anonymous Messaging"
+        ],
+        "summary": "Recruiter sees anonymous threads for their offer",
+        "operationId": "getOfferThreads",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/validations/received": {
+      "get": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Validations I received",
+        "operationId": "getReceivedValidations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/validations/given": {
+      "get": {
+        "tags": [
+          "Validations"
+        ],
+        "summary": "Validations I gave to others",
+        "operationId": "getGivenValidations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/matches": {
+      "get": {
+        "tags": [
+          "Matches (Candidate)"
+        ],
+        "summary": "List matched offers sorted by score",
+        "operationId": "getCandidateMatches",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/completion": {
+      "get": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Get profile completion percentage",
+        "operationId": "getCompletion",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompletionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/anonymous-threads": {
+      "get": {
+        "tags": [
+          "Anonymous Messaging"
+        ],
+        "summary": "Candidate's message inbox",
+        "operationId": "getCandidateThreads",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/me/skills/{id}": {
+      "delete": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Remove a skill from profile",
+        "operationId": "removeSkill",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me/projects/{id}": {
+      "delete": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Remove project",
+        "operationId": "removeProject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/me/experience/{id}": {
+      "delete": {
+        "tags": [
+          "Candidate Profile"
+        ],
+        "summary": "Remove work experience",
+        "operationId": "removeExperience",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CompanyRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "industry": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "cultureDescription": {
+            "type": "string"
+          }
+        }
+      },
+      "ProfileUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "currentRole": {
+            "type": "string"
+          },
+          "headline": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "linkedIn": {
+            "type": "string"
+          }
+        }
+      },
+      "SubmitValidationRequest": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "assignedLevel": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "JobOfferRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "modality": {
+            "type": "string"
+          },
+          "seniority": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "salaryMin": {
+            "type": "number",
+            "format": "double"
+          },
+          "salaryMax": {
+            "type": "number",
+            "format": "double"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      },
+      "VerifyIdentityRequest": {
+        "type": "object",
+        "properties": {
+          "dni": {
+            "type": "string"
+          },
+          "tramiteNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationRequestPayload": {
+        "type": "object",
+        "properties": {
+          "skillId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "validatorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "relationType": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AddSkillRequest": {
+        "type": "object",
+        "properties": {
+          "skillId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "experienceRange": {
+            "type": "string"
+          }
+        }
+      },
+      "ProjectRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          }
+        }
+      },
+      "WorkExperienceRequest": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string"
+          },
+          "isCurrent": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "minLength": 1
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          },
+          "userType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fullName": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "email",
+          "fullName",
+          "password",
+          "userType"
+        ]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "minLength": 1
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateThreadRequest": {
+        "type": "object",
+        "properties": {
+          "offerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "category": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SendMessageRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "SuggestedValidator": {
+        "type": "object",
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "seniority": {
+            "type": "string"
+          },
+          "confidenceScore": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "CompletionResponse": {
+        "type": "object",
+        "properties": {
+          "percentage": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}
