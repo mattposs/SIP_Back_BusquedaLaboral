@@ -1,9 +1,11 @@
 package com.sip.tp.service;
 
+import com.sip.tp.dto.request.AddSkillRequest;
+import com.sip.tp.dto.skill.SkillResponse;
+import com.sip.tp.dto.skill.CandidateSkillResponse;
 import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.CandidateSkill;
 import com.sip.tp.entity.Skill;
-import com.sip.tp.model.AddSkillRequest;
 import com.sip.tp.repository.CandidateRepository;
 import com.sip.tp.repository.CandidateSkillRepository;
 import com.sip.tp.repository.SkillRepository;
@@ -26,25 +28,25 @@ public class SkillService {
     private final ProfileService profileAlgorithms;
 
     @Transactional(readOnly = true)
-    public List<SkillDto> searchCatalog(String search) {
+    public List<SkillResponse> searchCatalog(String search) {
         return skillRepository.findByNameContainingIgnoreCase(search).stream()
-                .map(s -> new SkillDto(s.getId(), s.getName(), s.getType().code()))
+                .map(s -> new SkillResponse(s.getId(), s.getName(), s.getType().code()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<SkillDto> getSuggestedSkillsForCandidate(UUID candidateId) {
+    public List<SkillResponse> getSuggestedSkillsForCandidate(UUID candidateId) {
         // In a real app, this would use an ML model or a mapping table based on `candidate.getCurrentRole()`.
         // Returning top 5 overall skills as a fallback implementation.
         return skillRepository.findAll().stream().limit(5)
-                .map(s -> new SkillDto(s.getId(), s.getName(), s.getType().code()))
+                .map(s -> new SkillResponse(s.getId(), s.getName(), s.getType().code()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<CandidateSkillDto> getCandidateSkills(UUID candidateId) {
+    public List<CandidateSkillResponse> getCandidateSkills(UUID candidateId) {
         return candidateSkillRepository.findAllByCandidateId(candidateId).stream()
-                .map(cs -> new CandidateSkillDto(
+                .map(cs -> new CandidateSkillResponse(
                         cs.getId(),
                         cs.getSkill().getName(),
                         cs.getExperienceRange().code(),
@@ -86,12 +88,5 @@ public class SkillService {
         candidateSkillRepository.delete(skill);
         Candidate candidate = skill.getCandidate();
         candidate.setProfileCompletion(profileAlgorithms.calculateProfileCompletion(candidate));
-    }
-
-    public record SkillDto(UUID id, String name, String type) {
-    }
-
-    public record CandidateSkillDto(UUID id, String skillName, String experienceRange, String consolidatedLevel,
-                                    Double consolidatedScore) {
     }
 }

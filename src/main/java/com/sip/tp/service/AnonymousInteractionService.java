@@ -1,5 +1,7 @@
 package com.sip.tp.service;
 
+import com.sip.tp.dto.message.AnonymousThreadResponse;
+import com.sip.tp.dto.message.AnonymousThreadDetailResponse;
 import com.sip.tp.entity.*;
 import com.sip.tp.repository.AnonymousMessageRepository;
 import com.sip.tp.repository.AnonymousThreadRepository;
@@ -54,19 +56,31 @@ public class AnonymousInteractionService {
     }
 
     @Transactional(readOnly = true)
-    public List<ThreadDto> getCandidateThreads(UUID candidateId) {
-        return threadRepository.findAll().stream()
-                .filter(t -> t.getCandidate().getId().equals(candidateId))
-                .map(t -> new ThreadDto(t.getId(), t.getAnonymousCode(), t.getOffer().getTitle(), t.getCategory().code(), t.getStatus().code()))
+    public List<AnonymousThreadResponse> getCandidateThreads(UUID candidateId) {
+        return threadRepository.findAllByCandidateId(candidateId).stream()
+                .map(t -> new AnonymousThreadResponse(t.getId(), t.getAnonymousCode(), t.getCategory().code(), t.getStatus().code(), t.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<ThreadDto> getOfferThreads(UUID recruiterId, UUID offerId) {
-        return threadRepository.findAll().stream()
-                .filter(t -> t.getOffer().getId().equals(offerId))
+    public AnonymousThreadDetailResponse getThreadDetail(UUID threadId, UUID requesterId) {
+        AnonymousThread thread = threadRepository.findById(threadId).orElseThrow();
+        boolean isCandidate = thread.getCandidate().getId().equals(requesterId);
+        boolean isRecruiter = thread.getOffer().getRecruiter().getId().equals(requesterId);
+        if (!isCandidate && !isRecruiter) throw new SecurityException("Unauthorized");
+
+        List<AnonymousThreadDetailResponse.AnonymousMessageResponse> messages = messageRepository.findAllByThreadIdOrderByCreatedAtAsc(threadId).stream()
+                .map(m -> new AnonymousThreadDetailResponse.AnonymousMessageResponse(m.getId(), m.getSenderType().code(), m.getContent(), m.getCreatedAt()))
+                .collect(Collectors.toList());
+        return new AnonymousThreadDetailResponse(thread.getId(), thread.getAnonymousCode(), thread.getCategory().code(),
+                thread.getStatus().code(), messages, thread.getCreatedAt());
+    }
+
+    @Transactional(readOnly = true)
+    public List<AnonymousThreadResponse> getOfferThreads(UUID recruiterId, UUID offerId) {
+        return threadRepository.findAllByOfferId(offerId).stream()
                 .filter(t -> t.getOffer().getRecruiter().getId().equals(recruiterId))
-                .map(t -> new ThreadDto(t.getId(), t.getAnonymousCode(), t.getOffer().getTitle(), t.getCategory().code(), t.getStatus().code()))
+                .map(t -> new AnonymousThreadResponse(t.getId(), t.getAnonymousCode(), t.getCategory().code(), t.getStatus().code(), t.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 
@@ -106,8 +120,5 @@ public class AnonymousInteractionService {
     @Transactional
     public void declineInterest(Match match) {
         match.setStatus(new MatchStatus.NotInterested());
-    }
-
-    public record ThreadDto(UUID id, String anonymousCode, String offerTitle, String category, String status) {
     }
 }

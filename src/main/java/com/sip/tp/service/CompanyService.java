@@ -1,13 +1,14 @@
 package com.sip.tp.service;
 
-import com.sip.tp.controller.OfferAndMatchController;
+import com.sip.tp.dto.request.CompanyRequest;
+import com.sip.tp.dto.response.CompanyResponse;
 import com.sip.tp.entity.Company;
 import com.sip.tp.entity.Recruiter;
 import com.sip.tp.repository.CompanyRepository;
 import com.sip.tp.repository.RecruiterRepository;
 import com.sip.tp.types.definition.CompanySize;
 import com.sip.tp.types.definition.Industry;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class CompanyService {
     private final RecruiterRepository recruiterRepository;
 
     @Transactional
-    public UUID createCompany(UUID recruiterId, OfferAndMatchController.CompanyRequest request) {
+    public UUID createCompany(UUID recruiterId, CompanyRequest request) {
         Recruiter recruiter = recruiterRepository.findById(recruiterId).orElseThrow();
 
         Industry ind = switch (request.industry().toUpperCase()) {
@@ -51,11 +52,20 @@ public class CompanyService {
     }
 
     @Transactional
-    public void updateCompany(UUID recruiterId, UUID companyId, OfferAndMatchController.CompanyRequest request) {
+    public void updateCompany(UUID recruiterId, UUID companyId, CompanyRequest request) {
         Company company = companyRepository.findById(companyId).orElseThrow();
         // In reality, check if recruiter belongs to this company
         company.setName(request.name());
         company.setCultureDescription(request.cultureDescription());
         companyRepository.save(company);
+    }
+
+    @Transactional(readOnly = true)
+    public CompanyResponse getCompany(UUID companyId) {
+        Company company = companyRepository.findById(companyId).orElseThrow();
+        return new CompanyResponse(company.getId(), company.getName(), company.getLogo(), company.getWebsite(),
+                company.getIndustry() != null ? company.getIndustry().code() : null,
+                company.getSize() != null ? company.getSize().code() : null,
+                company.getCultureDescription(), company.getIsPartner());
     }
 }

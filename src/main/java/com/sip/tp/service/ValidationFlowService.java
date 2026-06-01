@@ -1,8 +1,10 @@
 package com.sip.tp.service;
 
+import com.sip.tp.dto.request.ValidationRequestPayload;
+import com.sip.tp.dto.request.SubmitValidationRequest;
+import com.sip.tp.dto.validation.ValidationResponse;
+import com.sip.tp.dto.validation.ValidationRequestResponse;
 import com.sip.tp.entity.*;
-import com.sip.tp.model.SubmitValidationRequest;
-import com.sip.tp.model.ValidationRequestPayload;
 import com.sip.tp.repository.*;
 import com.sip.tp.types.definition.RelationType;
 import com.sip.tp.types.definition.RequestStatus;
@@ -28,27 +30,43 @@ public class ValidationFlowService {
     private final ValidationScoringService scoringService;
 
     @Transactional(readOnly = true)
-    public List<ValidationDto> getGivenValidations(UUID validatorId) {
-        return validationRepository.findAll().stream()
-                .filter(v -> v.getValidator().getId().equals(validatorId))
-                .map(v -> new ValidationDto(v.getId(), v.getSkill().getName(), v.getCandidate().getFullName(), v.getValidator().getFullName(), v.getAssignedLevel().code(), v.getComment(), v.getCreatedAt()))
+    public List<ValidationResponse> getGivenValidations(UUID validatorId) {
+        return validationRepository.findAllByValidatorId(validatorId).stream()
+                .map(v -> new ValidationResponse(v.getId(), v.getSkill().getName(), v.getCandidate().getFullName(), v.getValidator().getFullName(), v.getAssignedLevel().code(), v.getComment(), v.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<ValidationDto> getReceivedValidations(UUID candidateId) {
-        return validationRepository.findAll().stream()
-                .filter(v -> v.getCandidate().getId().equals(candidateId))
-                .map(v -> new ValidationDto(v.getId(), v.getSkill().getName(), v.getCandidate().getFullName(), v.getValidator().getFullName(), v.getAssignedLevel().code(), v.getComment(), v.getCreatedAt()))
+    public List<ValidationResponse> getReceivedValidations(UUID candidateId) {
+        return validationRepository.findAllByCandidateId(candidateId).stream()
+                .map(v -> new ValidationResponse(v.getId(), v.getSkill().getName(), v.getCandidate().getFullName(), v.getValidator().getFullName(), v.getAssignedLevel().code(), v.getComment(), v.getCreatedAt()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<RequestDto> getIncomingRequests(UUID validatorId, String status) {
-        RequestStatus reqStatus = status.equalsIgnoreCase("PENDING") ? new RequestStatus.Pending() : new RequestStatus.Completed();
+    public List<ValidationRequestResponse> getIncomingRequests(UUID validatorId, String status) {
+        RequestStatus reqStatus = parseRequestStatus(status);
         return requestRepository.findAllByValidatorIdAndStatus(validatorId, reqStatus).stream()
-                .map(r -> new RequestDto(r.getId(), r.getSkill().getName(), r.getRequester().getFullName(), r.getRelationType().code(), r.getMessage(), r.getStatus().code()))
+                .map(r -> new ValidationRequestResponse(r.getId(), r.getSkill().getName(), r.getRequester().getFullName(), r.getRelationType().code(), r.getMessage(), r.getStatus().code()))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ValidationRequestResponse> getSentRequests(UUID requesterId, String status) {
+        List<ValidationRequest> requests = (status == null || status.isBlank())
+                ? requestRepository.findAllByRequesterId(requesterId)
+                : requestRepository.findAllByRequesterIdAndStatus(requesterId, parseRequestStatus(status));
+        return requests.stream()
+                .map(r -> new ValidationRequestResponse(r.getId(), r.getSkill().getName(), r.getValidator().getFullName(), r.getRelationType().code(), r.getMessage(), r.getStatus().code()))
+                .collect(Collectors.toList());
+    }
+
+    private RequestStatus parseRequestStatus(String status) {
+        return switch (status.toUpperCase()) {
+            case "COMPLETED" -> new RequestStatus.Completed();
+            case "REJECTED" -> new RequestStatus.Rejected();
+            default -> new RequestStatus.Pending();
+        };
     }
 
     @Transactional
@@ -109,13 +127,5 @@ public class ValidationFlowService {
         if (!request.getValidator().getId().equals(validatorId)) throw new SecurityException("Unauthorized");
         request.setStatus(new RequestStatus.Rejected());
         requestRepository.save(request);
-    }
-
-    public record ValidationDto(UUID id, String skillName, String candidateName, String validatorName,
-                                String assignedLevel, String comment, Instant createdAt) {
-    }
-
-    public record RequestDto(UUID id, String skillName, String requesterName, String relationType, String message,
-                             String status) {
     }
 }

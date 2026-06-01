@@ -1,6 +1,6 @@
 package com.sip.tp.entity;
 
-import com.sip.tp.types.converters.SkillTypeConverter;
+import com.sip.tp.types.converters.SkillLevelConverter;
 import com.sip.tp.types.definition.SkillLevel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,7 +37,7 @@ public class Validation {
     @JoinColumn(name = "skill_id", nullable = false)
     private Skill skill;
 
-    @Convert(converter = SkillTypeConverter.class)
+    @Convert(converter = SkillLevelConverter.class)
     @Column(nullable = false)
     private SkillLevel assignedLevel;
 

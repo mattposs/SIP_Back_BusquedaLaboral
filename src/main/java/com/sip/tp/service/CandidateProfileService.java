@@ -1,10 +1,12 @@
 package com.sip.tp.service;
 
-import com.sip.tp.controller.CandidateController;
+import com.sip.tp.dto.request.ProfileUpdateRequest;
+import com.sip.tp.dto.request.WorkExperienceRequest;
+import com.sip.tp.dto.request.ProjectRequest;
+import com.sip.tp.dto.response.CandidateProfileResponse;
 import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.Project;
 import com.sip.tp.entity.WorkExperience;
-import com.sip.tp.model.ProfileUpdateRequest;
 import com.sip.tp.repository.CandidateRepository;
 import com.sip.tp.repository.ProjectRepository;
 import com.sip.tp.repository.WorkExperienceRepository;
@@ -78,7 +80,7 @@ public class CandidateProfileService {
     }
 
     @Transactional
-    public UUID addWorkExperience(UUID candidateId, CandidateController.WorkExperienceRequest request) {
+    public UUID addWorkExperience(UUID candidateId, WorkExperienceRequest request) {
         Candidate candidate = candidateRepository.findById(candidateId).orElseThrow();
         WorkExperience experience = WorkExperience.builder()
                 .candidate(candidate)
@@ -103,7 +105,20 @@ public class CandidateProfileService {
     }
 
     @Transactional
-    public UUID addProject(UUID candidateId, CandidateController.ProjectRequest request) {
+    public void updateWorkExperience(UUID candidateId, UUID experienceId, WorkExperienceRequest request) {
+        WorkExperience experience = experienceRepository.findById(experienceId).orElseThrow();
+        if (!experience.getCandidate().getId().equals(candidateId)) throw new SecurityException("Unauthorized");
+        experience.setCompany(request.company());
+        experience.setPosition(request.position());
+        experience.setStartDate(LocalDate.parse(request.startDate()));
+        experience.setEndDate(request.endDate() != null ? LocalDate.parse(request.endDate()) : null);
+        experience.setIsCurrent(request.isCurrent());
+        experience.setDescription(request.description());
+        experienceRepository.save(experience);
+    }
+
+    @Transactional
+    public UUID addProject(UUID candidateId, ProjectRequest request) {
         Candidate candidate = candidateRepository.findById(candidateId).orElseThrow();
         Project project = Project.builder()
                 .candidate(candidate)
@@ -124,8 +139,13 @@ public class CandidateProfileService {
         projectRepository.delete(project);
     }
 
-    public record CandidateProfileResponse(UUID id, String fullName, String location, String currentRole,
-                                           String headline, String profilePhoto, Boolean identityVerified,
-                                           Integer profileCompletion) {
+    @Transactional
+    public void updateProject(UUID candidateId, UUID projectId, ProjectRequest request) {
+        Project project = projectRepository.findById(projectId).orElseThrow();
+        if (!project.getCandidate().getId().equals(candidateId)) throw new SecurityException("Unauthorized");
+        project.setTitle(request.title());
+        project.setDescription(request.description());
+        project.setLink(request.link());
+        projectRepository.save(project);
     }
 }

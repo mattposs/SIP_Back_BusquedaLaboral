@@ -1,7 +1,9 @@
 package com.sip.tp.controller;
 
-import com.sip.tp.model.SubmitValidationRequest;
-import com.sip.tp.model.ValidationRequestPayload;
+import com.sip.tp.dto.request.SubmitValidationRequest;
+import com.sip.tp.dto.request.ValidationRequestPayload;
+import com.sip.tp.dto.validation.ValidationResponse;
+import com.sip.tp.dto.validation.ValidationRequestResponse;
 import com.sip.tp.service.ValidationFlowService;
 import com.sip.tp.service.ValidatorSuggestionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,22 +28,30 @@ public class ValidationController {
 
     @GetMapping("/candidates/me/validations/given")
     @Operation(summary = "Validations I gave to others")
-    public ResponseEntity<List<Object>> getGivenValidations(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        return ResponseEntity.ok(Collections.singletonList(validationService.getGivenValidations(candidateId)));
+    public ResponseEntity<List<ValidationResponse>> getGivenValidations(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(validationService.getGivenValidations(candidateId));
     }
 
     @GetMapping("/candidates/me/validations/received")
     @Operation(summary = "Validations I received")
-    public ResponseEntity<List<Object>> getReceivedValidations(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        return ResponseEntity.ok(Collections.singletonList(validationService.getReceivedValidations(candidateId)));
+    public ResponseEntity<List<ValidationResponse>> getReceivedValidations(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(validationService.getReceivedValidations(candidateId));
     }
 
     @GetMapping("/candidates/me/validation-requests")
     @Operation(summary = "Incoming requests asking me to validate others")
-    public ResponseEntity<List<Object>> getIncomingRequests(
+    public ResponseEntity<List<ValidationRequestResponse>> getIncomingRequests(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
             @RequestParam(required = false, defaultValue = "PENDING") String status) {
-        return ResponseEntity.ok(Collections.singletonList(validationService.getIncomingRequests(candidateId, status)));
+        return ResponseEntity.ok(validationService.getIncomingRequests(candidateId, status));
+    }
+
+    @GetMapping("/candidates/me/validation-requests/sent")
+    @Operation(summary = "Outgoing validation requests I sent")
+    public ResponseEntity<List<ValidationRequestResponse>> getSentRequests(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
+            @RequestParam(required = false) String status) {
+        return ResponseEntity.ok(validationService.getSentRequests(candidateId, status));
     }
 
     @PostMapping("/candidates/me/validation-requests")
@@ -80,3 +89,4 @@ public class ValidationController {
         return ResponseEntity.ok().build();
     }
 }
+

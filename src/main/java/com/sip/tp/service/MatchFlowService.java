@@ -1,5 +1,8 @@
 package com.sip.tp.service;
 
+import com.sip.tp.dto.match.CandidateMatchResponse;
+import com.sip.tp.dto.match.MatchDetailResponse;
+import com.sip.tp.dto.match.RecruiterCandidateMatchResponse;
 import com.sip.tp.entity.Match;
 import com.sip.tp.repository.MatchRepository;
 import com.sip.tp.types.definition.MatchStatus;
@@ -19,28 +22,50 @@ public class MatchFlowService {
     private final AnonymousInteractionService interactionService;
 
     @Transactional(readOnly = true)
-    public List<CandidateMatchDto> getCandidateMatches(UUID candidateId) {
+    public List<CandidateMatchResponse> getCandidateMatches(UUID candidateId) {
         return matchRepository.findAllByCandidateIdOrderByMatchScoreDesc(candidateId).stream()
-                .map(m -> new CandidateMatchDto(m.getOffer().getId(), m.getOffer().getTitle(), m.getOffer().getCompany().getName(), m.getMatchScore(), m.getStatus().code()))
+                .map(m -> new CandidateMatchResponse(m.getOffer().getId(), m.getOffer().getTitle(), m.getOffer().getCompany().getName(), m.getMatchScore(), m.getStatus().code()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<RecruiterCandidateMatchDto> getMatchedCandidatesForOffer(UUID recruiterId, UUID offerId) {
-        return matchRepository.findAll().stream()
-                .filter(m -> m.getOffer().getId().equals(offerId))
+    public MatchDetailResponse getMatchDetail(UUID candidateId, UUID offerId) {
+        Match match = findMatch(candidateId, offerId);
+        return new MatchDetailResponse(match.getOffer().getId(), match.getOffer().getTitle(),
+                match.getOffer().getCompany().getName(), match.getMatchScore(), match.getStatus().code(),
+                match.getProfileRevealed());
+    }
+
+    @Transactional(readOnly = true)
+    public List<RecruiterCandidateMatchResponse> getMatchedCandidatesForOffer(UUID recruiterId, UUID offerId) {
+        return matchRepository.findAllByOfferIdOrderByMatchScoreDesc(offerId).stream()
                 .filter(m -> m.getOffer().getRecruiter().getId().equals(recruiterId))
                 .map(m -> {
                     if (m.getProfileRevealed()) {
-                        return new RecruiterCandidateMatchDto(m.getId(), m.getMatchScore(), true,
+                        return new RecruiterCandidateMatchResponse(m.getId(), m.getMatchScore(), true,
                                 m.getCandidate().getFullName(), m.getCandidate().getEmail(), m.getCandidate().getLinkedIn());
                     } else {
                         // Point 2.6: Hidden identity for non-interested candidates
-                        return new RecruiterCandidateMatchDto(m.getId(), m.getMatchScore(), false,
+                        return new RecruiterCandidateMatchResponse(m.getId(), m.getMatchScore(), false,
                                 "Hidden Candidate", null, null);
                     }
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public RecruiterCandidateMatchResponse getCandidateDetailForRecruiter(UUID recruiterId, UUID offerId, UUID candidateId) {
+        Match match = matchRepository.findByCandidateIdAndOfferId(candidateId, offerId)
+                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
+        if (!match.getOffer().getRecruiter().getId().equals(recruiterId)) throw new SecurityException("Unauthorized");
+
+        if (match.getProfileRevealed()) {
+            return new RecruiterCandidateMatchResponse(match.getId(), match.getMatchScore(), true,
+                    match.getCandidate().getFullName(), match.getCandidate().getEmail(), match.getCandidate().getLinkedIn());
+        } else {
+            return new RecruiterCandidateMatchResponse(match.getId(), match.getMatchScore(), false,
+                    "Hidden Candidate", null, null);
+        }
     }
 
     @Transactional
@@ -58,16 +83,7 @@ public class MatchFlowService {
     }
 
     private Match findMatch(UUID candidateId, UUID offerId) {
-        return matchRepository.findAllByCandidateIdOrderByMatchScoreDesc(candidateId).stream()
-                .filter(m -> m.getOffer().getId().equals(offerId)).findFirst().orElseThrow();
-    }
-
-    public record CandidateMatchDto(UUID offerId, String offerTitle, String companyName, Integer matchScore,
-                                    String status) {
-    }
-
-    // Dynamic output for recruiters based on reveal status
-    public record RecruiterCandidateMatchDto(UUID matchId, Integer matchScore, Boolean profileRevealed,
-                                             String fullName, String email, String linkedIn) {
+        return matchRepository.findByCandidateIdAndOfferId(candidateId, offerId)
+                .orElseThrow(() -> new IllegalArgumentException("Match not found"));
     }
 }
