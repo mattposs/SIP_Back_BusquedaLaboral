@@ -1,25 +1,13 @@
 package com.sip.tp.types.converters;
 
 import com.sip.tp.types.definition.MatchStatus;
-import jakarta.persistence.AttributeConverter;
+import com.sip.tp.util.converter.EnumConverter;
 import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
-public class MatchStatusConverter implements AttributeConverter<MatchStatus, String> {
-    @Override
-    public String convertToDatabaseColumn(MatchStatus attribute) {
-        return (attribute == null) ? null : attribute.code();
-    }
+public class MatchStatusConverter extends EnumConverter<MatchStatus> {
 
-    @Override
-    public MatchStatus convertToEntityAttribute(String dbData) {
-        if (dbData == null) return null;
-        return switch (dbData) {
-            case "SUGGESTED" -> new MatchStatus.Suggested();
-            case "INTERESTED" -> new MatchStatus.Interested();
-            case "NOT_INTERESTED" -> new MatchStatus.NotInterested();
-            default -> throw new IllegalArgumentException("Unknown MatchStatus: " + dbData);
-        };
+    public MatchStatusConverter() {
+        super(MatchStatus.class);
     }
 }
-

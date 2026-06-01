@@ -11,4 +11,8 @@ import java.util.UUID;
 @Repository
 public interface ValidationRequestRepository extends JpaRepository<ValidationRequest, UUID> {
     List<ValidationRequest> findAllByValidatorIdAndStatus(UUID validatorId, RequestStatus status);
+
+    List<ValidationRequest> findAllByRequesterIdAndStatus(UUID requesterId, RequestStatus status);
+
+    List<ValidationRequest> findAllByRequesterId(UUID requesterId);
 }

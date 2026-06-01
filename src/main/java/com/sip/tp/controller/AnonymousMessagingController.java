@@ -1,6 +1,10 @@
 package com.sip.tp.controller;
 
-import com.sip.tp.service.AnonymousInteractionService;
+import com.sip.tp.dto.message.AnonymousThreadDetailResponse;
+import com.sip.tp.dto.message.AnonymousThreadResponse;
+import com.sip.tp.dto.request.CreateThreadRequest;
+import com.sip.tp.dto.request.SendMessageRequest;
+import com.sip.tp.service.domain.messaging.AnonymousInteractionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,17 +34,34 @@ public class AnonymousMessagingController {
 
     @GetMapping("/candidates/me/anonymous-threads")
     @Operation(summary = "Candidate's message inbox")
-    public ResponseEntity<List<Object>> getCandidateThreads(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        return ResponseEntity.ok(Collections.singletonList(messagingService.getCandidateThreads(candidateId)));
+    public ResponseEntity<List<AnonymousThreadResponse>> getCandidateThreads(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(messagingService.getCandidateThreads(candidateId));
+    }
+
+    @GetMapping("/candidates/me/anonymous-threads/{id}")
+    @Operation(summary = "Candidate views a specific thread with messages")
+    public ResponseEntity<AnonymousThreadDetailResponse> getCandidateThreadDetail(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
+            @PathVariable UUID id) {
+        return ResponseEntity.ok(messagingService.getThreadDetail(id, candidateId));
     }
 
     // --- Recruiter Endpoints ---
     @GetMapping("/offers/{offerId}/anonymous-threads")
     @Operation(summary = "Recruiter sees anonymous threads for their offer")
-    public ResponseEntity<List<Object>> getOfferThreads(
+    public ResponseEntity<List<AnonymousThreadResponse>> getOfferThreads(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
             @PathVariable UUID offerId) {
-        return ResponseEntity.ok(Collections.singletonList(messagingService.getOfferThreads(recruiterId, offerId)));
+        return ResponseEntity.ok(messagingService.getOfferThreads(recruiterId, offerId));
+    }
+
+    @GetMapping("/offers/{offerId}/anonymous-threads/{id}")
+    @Operation(summary = "Recruiter views a specific anonymous thread detail (no candidate identity)")
+    public ResponseEntity<AnonymousThreadDetailResponse> getOfferThreadDetail(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
+            @PathVariable UUID offerId,
+            @PathVariable UUID id) {
+        return ResponseEntity.ok(messagingService.getThreadDetail(id, recruiterId));
     }
 
     // --- Shared Action ---
@@ -53,11 +73,5 @@ public class AnonymousMessagingController {
             @RequestBody SendMessageRequest request) {
         messagingService.sendMessage(senderId, id, request.content());
         return ResponseEntity.ok().build();
-    }
-
-    public record CreateThreadRequest(UUID offerId, String category, String message) {
-    }
-
-    public record SendMessageRequest(String content) {
     }
 }

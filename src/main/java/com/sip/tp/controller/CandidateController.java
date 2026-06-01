@@ -1,7 +1,11 @@
 package com.sip.tp.controller;
 
-import com.sip.tp.model.ProfileUpdateRequest;
-import com.sip.tp.service.CandidateProfileService;
+import com.sip.tp.dto.request.ProfileUpdateRequest;
+import com.sip.tp.dto.request.ProjectRequest;
+import com.sip.tp.dto.request.VerifyIdentityRequest;
+import com.sip.tp.dto.request.WorkExperienceRequest;
+import com.sip.tp.dto.response.CompletionResponse;
+import com.sip.tp.service.domain.candidate.CandidateProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,8 +51,7 @@ public class CandidateController {
     @GetMapping("/completion")
     @Operation(summary = "Get profile completion percentage")
     public ResponseEntity<CompletionResponse> getCompletion(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        int completion = candidateService.getProfileCompletion(candidateId);
-        return ResponseEntity.ok(new CompletionResponse(completion));
+        return ResponseEntity.ok(candidateService.getProfileCompletion(candidateId));
     }
 
     @PostMapping("/verify-identity")
@@ -65,6 +68,16 @@ public class CandidateController {
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
             @RequestBody WorkExperienceRequest request) {
         return ResponseEntity.ok(candidateService.addWorkExperience(candidateId, request));
+    }
+
+    @PutMapping("/experience/{id}")
+    @Operation(summary = "Update work experience")
+    public ResponseEntity<Void> updateExperience(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
+            @PathVariable UUID id,
+            @RequestBody WorkExperienceRequest request) {
+        candidateService.updateWorkExperience(candidateId, id, request);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/experience/{id}")
@@ -84,6 +97,16 @@ public class CandidateController {
         return ResponseEntity.ok(candidateService.addProject(candidateId, request));
     }
 
+    @PutMapping("/projects/{id}")
+    @Operation(summary = "Update project")
+    public ResponseEntity<Void> updateProject(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
+            @PathVariable UUID id,
+            @RequestBody ProjectRequest request) {
+        candidateService.updateProject(candidateId, id, request);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/projects/{id}")
     @Operation(summary = "Remove project")
     public ResponseEntity<Void> removeProject(
@@ -91,18 +114,5 @@ public class CandidateController {
             @PathVariable UUID id) {
         candidateService.removeProject(candidateId, id);
         return ResponseEntity.noContent().build();
-    }
-
-    public record VerifyIdentityRequest(String dni, String tramiteNumber) {
-    }
-
-    public record CompletionResponse(int percentage) {
-    }
-
-    public record WorkExperienceRequest(String company, String position, String startDate, String endDate,
-                                        Boolean isCurrent, String description) {
-    }
-
-    public record ProjectRequest(String title, String description, String link) {
     }
 }

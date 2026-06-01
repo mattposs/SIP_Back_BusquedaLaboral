@@ -1,8 +1,9 @@
 package com.sip.tp.controller;
 
-
-import com.sip.tp.model.AddSkillRequest;
-import com.sip.tp.service.SkillService;
+import com.sip.tp.dto.request.AddSkillRequest;
+import com.sip.tp.dto.skill.CandidateSkillResponse;
+import com.sip.tp.dto.skill.SkillResponse;
+import com.sip.tp.service.domain.candidate.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,20 +24,20 @@ public class SkillController {
 
     @GetMapping("/skills")
     @Operation(summary = "Search skill catalog")
-    public ResponseEntity<List<Object>> searchSkills(@RequestParam(required = false, defaultValue = "") String search) {
-        return ResponseEntity.ok(Collections.singletonList(skillService.searchCatalog(search)));
+    public ResponseEntity<List<SkillResponse>> searchSkills(@RequestParam(required = false, defaultValue = "") String search) {
+        return ResponseEntity.ok(skillService.searchCatalog(search));
     }
 
     @GetMapping("/skills/suggestions")
     @Operation(summary = "Get suggested skills based on role")
-    public ResponseEntity<List<Object>> getSuggestedSkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        return ResponseEntity.ok(Collections.singletonList(skillService.getSuggestedSkillsForCandidate(candidateId)));
+    public ResponseEntity<List<SkillResponse>> getSuggestedSkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(skillService.getSuggestedSkillsForCandidate(candidateId));
     }
 
     @GetMapping("/candidates/me/skills")
     @Operation(summary = "List own skills with levels and scores")
-    public ResponseEntity<List<Object>> getMySkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        return ResponseEntity.ok(Collections.singletonList(skillService.getCandidateSkills(candidateId)));
+    public ResponseEntity<List<CandidateSkillResponse>> getMySkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(skillService.getCandidateSkills(candidateId));
     }
 
     @PostMapping("/candidates/me/skills")
