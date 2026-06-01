@@ -1,11 +1,7 @@
 package com.sip.tp.util.converter;
 
 import com.sip.tp.dto.request.CompanyRequest;
-import com.sip.tp.types.definition.CompanySize;
-import com.sip.tp.types.definition.ExperienceRange;
-import com.sip.tp.types.definition.Industry;
-import com.sip.tp.types.definition.SkillLevel;
-import com.sip.tp.types.definition.UserType;
+import com.sip.tp.types.definition.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;

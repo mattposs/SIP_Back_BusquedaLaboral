@@ -24,32 +24,6 @@ public abstract class EnumConverter<T> implements AttributeConverter<T, String> 
         this.byCode = buildRegistry(baseType, codeMethod);
     }
 
-    @Override
-    public String convertToDatabaseColumn(T attribute) {
-        if (attribute == null) {
-            return null;
-        }
-
-        try {
-            return (String) codeMethod.invoke(attribute);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new IllegalStateException("Cannot read code() from type: " + attribute.getClass().getName(), e);
-        }
-    }
-
-    @Override
-    public T convertToEntityAttribute(String dbData) {
-        if (dbData == null) {
-            return null;
-        }
-
-        T mapped = byCode.get(dbData);
-        if (mapped == null) {
-            throw new IllegalArgumentException("Unknown value for " + codeMethod.getDeclaringClass().getSimpleName() + ": " + dbData);
-        }
-        return mapped;
-    }
-
     private static <T> Map<String, T> buildRegistry(Class<T> baseType, Method codeMethod) {
         Class<?>[] permitted = baseType.getPermittedSubclasses();
         if (permitted == null || permitted.length == 0) {
@@ -96,6 +70,32 @@ public abstract class EnumConverter<T> implements AttributeConverter<T, String> 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new IllegalStateException("Cannot instantiate subtype: " + subtype.getName(), e);
         }
+    }
+
+    @Override
+    public String convertToDatabaseColumn(T attribute) {
+        if (attribute == null) {
+            return null;
+        }
+
+        try {
+            return (String) codeMethod.invoke(attribute);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalStateException("Cannot read code() from type: " + attribute.getClass().getName(), e);
+        }
+    }
+
+    @Override
+    public T convertToEntityAttribute(String dbData) {
+        if (dbData == null) {
+            return null;
+        }
+
+        T mapped = byCode.get(dbData);
+        if (mapped == null) {
+            throw new IllegalArgumentException("Unknown value for " + codeMethod.getDeclaringClass().getSimpleName() + ": " + dbData);
+        }
+        return mapped;
     }
 }
 

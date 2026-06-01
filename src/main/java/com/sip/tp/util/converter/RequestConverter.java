@@ -1,27 +1,8 @@
 package com.sip.tp.util.converter;
 
-import com.sip.tp.dto.request.CompanyRequest;
-import com.sip.tp.dto.request.JobOfferRequest;
-import com.sip.tp.dto.request.ProfileUpdateRequest;
-import com.sip.tp.dto.request.ProjectRequest;
-import com.sip.tp.dto.request.WorkExperienceRequest;
-import com.sip.tp.entity.Candidate;
-import com.sip.tp.entity.Company;
-import com.sip.tp.entity.JobOffer;
-import com.sip.tp.entity.Project;
-import com.sip.tp.entity.Recruiter;
-import com.sip.tp.entity.WorkExperience;
-import com.sip.tp.types.definition.CompanySize;
-import com.sip.tp.types.definition.ExperienceRange;
-import com.sip.tp.types.definition.Industry;
-import com.sip.tp.types.definition.Modality;
-import com.sip.tp.types.definition.OfferStatus;
-import com.sip.tp.types.definition.RelationType;
-import com.sip.tp.types.definition.RequestStatus;
-import com.sip.tp.types.definition.Seniority;
-import com.sip.tp.types.definition.SkillLevel;
-import com.sip.tp.types.definition.ThreadCategory;
-import com.sip.tp.types.definition.UserType;
+import com.sip.tp.dto.request.*;
+import com.sip.tp.entity.*;
+import com.sip.tp.types.definition.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

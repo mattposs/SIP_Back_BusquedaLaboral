@@ -2,11 +2,7 @@ package com.sip.tp.service.domain.messaging;
 
 import com.sip.tp.dto.message.AnonymousThreadDetailResponse;
 import com.sip.tp.dto.message.AnonymousThreadResponse;
-import com.sip.tp.entity.AnonymousMessage;
-import com.sip.tp.entity.AnonymousThread;
-import com.sip.tp.entity.Candidate;
-import com.sip.tp.entity.JobOffer;
-import com.sip.tp.entity.Match;
+import com.sip.tp.entity.*;
 import com.sip.tp.repository.AnonymousMessageRepository;
 import com.sip.tp.repository.AnonymousThreadRepository;
 import com.sip.tp.repository.CandidateRepository;
