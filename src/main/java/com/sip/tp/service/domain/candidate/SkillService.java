@@ -1,4 +1,4 @@
-package com.sip.tp.service;
+package com.sip.tp.service.domain.candidate;
 
 import com.sip.tp.dto.request.AddSkillRequest;
 import com.sip.tp.dto.skill.CandidateSkillResponse;
@@ -9,7 +9,8 @@ import com.sip.tp.entity.Skill;
 import com.sip.tp.repository.CandidateRepository;
 import com.sip.tp.repository.CandidateSkillRepository;
 import com.sip.tp.repository.SkillRepository;
-import com.sip.tp.types.definition.ExperienceRange;
+import com.sip.tp.util.converter.RequestConverter;
+import com.sip.tp.util.converter.ResponseConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,33 +27,27 @@ public class SkillService {
     private final CandidateSkillRepository candidateSkillRepository;
     private final CandidateRepository candidateRepository;
     private final ProfileService profileAlgorithms;
+    private final RequestConverter requestConverter;
+    private final ResponseConverter responseConverter;
 
     @Transactional(readOnly = true)
     public List<SkillResponse> searchCatalog(String search) {
         return skillRepository.findByNameContainingIgnoreCase(search).stream()
-                .map(s -> new SkillResponse(s.getId(), s.getName(), s.getType().code()))
+                .map(responseConverter::toSkillResponse)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<SkillResponse> getSuggestedSkillsForCandidate(UUID candidateId) {
-        // In a real app, this would use an ML model or a mapping table based on `candidate.getCurrentRole()`.
-        // Returning top 5 overall skills as a fallback implementation.
         return skillRepository.findAll().stream().limit(5)
-                .map(s -> new SkillResponse(s.getId(), s.getName(), s.getType().code()))
+                .map(responseConverter::toSkillResponse)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<CandidateSkillResponse> getCandidateSkills(UUID candidateId) {
         return candidateSkillRepository.findAllByCandidateId(candidateId).stream()
-                .map(cs -> new CandidateSkillResponse(
-                        cs.getId(),
-                        cs.getSkill().getName(),
-                        cs.getExperienceRange().code(),
-                        cs.getConsolidatedLevel() != null ? cs.getConsolidatedLevel().code() : null,
-                        cs.getConsolidatedScore() != null ? cs.getConsolidatedScore().doubleValue() : null
-                ))
+                .map(responseConverter::toCandidateSkillResponse)
                 .collect(Collectors.toList());
     }
 
@@ -61,19 +56,10 @@ public class SkillService {
         Candidate candidate = candidateRepository.findById(candidateId).orElseThrow();
         Skill skill = skillRepository.findById(request.skillId()).orElseThrow();
 
-        ExperienceRange range = switch (request.experienceRange()) {
-            case "<1 year" -> new ExperienceRange.LessThan1Year();
-            case "1-3 years" -> new ExperienceRange.Years1To3();
-            case "4-6 years" -> new ExperienceRange.Years4To6();
-            case "7-10 years" -> new ExperienceRange.Years7To10();
-            case "10+ years" -> new ExperienceRange.Years10Plus();
-            default -> throw new IllegalArgumentException("Invalid experience range");
-        };
-
         CandidateSkill candidateSkill = CandidateSkill.builder()
                 .candidate(candidate)
                 .skill(skill)
-                .experienceRange(range)
+                .experienceRange(requestConverter.toExperienceRange(request.experienceRange()))
                 .build();
 
         candidateSkillRepository.save(candidateSkill);

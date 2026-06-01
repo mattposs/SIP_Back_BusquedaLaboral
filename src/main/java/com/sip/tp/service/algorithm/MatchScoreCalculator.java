@@ -1,27 +1,23 @@
-package com.sip.tp.service;
+package com.sip.tp.service.algorithm;
 
 import com.sip.tp.entity.CandidateSkill;
-import com.sip.tp.entity.JobOffer;
 import com.sip.tp.entity.OfferSkill;
 import com.sip.tp.types.definition.Requirement;
 import com.sip.tp.types.definition.SkillLevel;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Service
-@RequiredArgsConstructor
-public class MatchCalculationService {
+@Component
+public class MatchScoreCalculator {
 
-    /**
-     * Algorithm 2.1: Match Score Calculation (0-100%)
-     */
-    public int calculateMatchScore(List<CandidateSkill> candidateSkills, JobOffer offer, List<OfferSkill> offerSkills) {
-        if (offerSkills.isEmpty()) return 100;
+    public int calculateMatchScore(List<CandidateSkill> candidateSkills, List<OfferSkill> offerSkills) {
+        if (offerSkills.isEmpty()) {
+            return 100;
+        }
 
         Map<UUID, CandidateSkill> candidateSkillMap = candidateSkills.stream()
                 .collect(Collectors.toMap(cs -> cs.getSkill().getId(), cs -> cs));
@@ -30,24 +26,21 @@ public class MatchCalculationService {
         double earnedPoints = 0.0;
 
         for (OfferSkill req : offerSkills) {
-            // Required skills weigh heavier than desirable skills
             double weight = req.getRequirement() instanceof Requirement.Required() ? 2.0 : 1.0;
             totalPossiblePoints += weight;
 
-            if (candidateSkillMap.containsKey(req.getSkill().getId())) {
-                CandidateSkill cs = candidateSkillMap.get(req.getSkill().getId());
+            CandidateSkill candidateSkill = candidateSkillMap.get(req.getSkill().getId());
+            if (candidateSkill == null) {
+                continue;
+            }
 
-                // Base point for having the skill
-                earnedPoints += weight;
-
-                // Bonus points based on consolidated level (if validated)
-                if (cs.getConsolidatedLevel() != null) {
-                    earnedPoints += calculateLevelBonus(cs.getConsolidatedLevel(), weight);
-                }
+            earnedPoints += weight;
+            if (candidateSkill.getConsolidatedLevel() != null) {
+                earnedPoints += calculateLevelBonus(candidateSkill.getConsolidatedLevel(), weight);
             }
         }
 
-        double rawPercentage = (earnedPoints / (totalPossiblePoints * 1.25)) * 100; // 1.25 accounts for max bonus
+        double rawPercentage = (earnedPoints / (totalPossiblePoints * 1.25)) * 100;
         return Math.min(100, (int) Math.round(rawPercentage));
     }
 
@@ -60,3 +53,4 @@ public class MatchCalculationService {
         };
     }
 }
+

@@ -3,7 +3,7 @@ package com.sip.tp.controller;
 import com.sip.tp.dto.request.AddSkillRequest;
 import com.sip.tp.dto.skill.CandidateSkillResponse;
 import com.sip.tp.dto.skill.SkillResponse;
-import com.sip.tp.service.SkillService;
+import com.sip.tp.service.domain.candidate.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -58,4 +58,3 @@ public class SkillController {
         return ResponseEntity.noContent().build();
     }
 }
-

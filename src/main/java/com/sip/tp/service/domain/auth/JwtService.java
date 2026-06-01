@@ -1,4 +1,4 @@
-package com.sip.tp.service;
+package com.sip.tp.service.domain.auth;
 
 import com.sip.tp.entity.UserData;
 import io.jsonwebtoken.Claims;

@@ -4,8 +4,8 @@ import com.sip.tp.dto.request.SubmitValidationRequest;
 import com.sip.tp.dto.request.ValidationRequestPayload;
 import com.sip.tp.dto.validation.ValidationRequestResponse;
 import com.sip.tp.dto.validation.ValidationResponse;
-import com.sip.tp.service.ValidationFlowService;
-import com.sip.tp.service.ValidatorSuggestionService;
+import com.sip.tp.service.domain.validation.ValidationFlowService;
+import com.sip.tp.service.domain.validation.ValidatorSuggestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,7 +24,6 @@ public class ValidationController {
 
     private final ValidationFlowService validationService;
     private final ValidatorSuggestionService suggestionService;
-
 
     @GetMapping("/candidates/me/validations/given")
     @Operation(summary = "Validations I gave to others")
@@ -89,4 +88,3 @@ public class ValidationController {
         return ResponseEntity.ok().build();
     }
 }
-

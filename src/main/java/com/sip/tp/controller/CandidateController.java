@@ -5,7 +5,7 @@ import com.sip.tp.dto.request.ProjectRequest;
 import com.sip.tp.dto.request.VerifyIdentityRequest;
 import com.sip.tp.dto.request.WorkExperienceRequest;
 import com.sip.tp.dto.response.CompletionResponse;
-import com.sip.tp.service.CandidateProfileService;
+import com.sip.tp.service.domain.candidate.CandidateProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,8 +51,7 @@ public class CandidateController {
     @GetMapping("/completion")
     @Operation(summary = "Get profile completion percentage")
     public ResponseEntity<CompletionResponse> getCompletion(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        int completion = candidateService.getProfileCompletion(candidateId);
-        return ResponseEntity.ok(new CompletionResponse(completion));
+        return ResponseEntity.ok(candidateService.getProfileCompletion(candidateId));
     }
 
     @PostMapping("/verify-identity")

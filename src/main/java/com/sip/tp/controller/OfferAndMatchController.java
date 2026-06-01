@@ -8,9 +8,9 @@ import com.sip.tp.dto.request.JobOfferRequest;
 import com.sip.tp.dto.response.CompanyResponse;
 import com.sip.tp.dto.response.JobOfferDetailResponse;
 import com.sip.tp.dto.response.JobOfferResponse;
-import com.sip.tp.service.CompanyService;
-import com.sip.tp.service.JobOfferService;
-import com.sip.tp.service.MatchFlowService;
+import com.sip.tp.service.domain.matching.MatchFlowService;
+import com.sip.tp.service.domain.recruiter.CompanyService;
+import com.sip.tp.service.domain.recruiter.JobOfferService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -57,7 +57,6 @@ public class OfferAndMatchController {
         return ResponseEntity.ok(companyService.getCompany(id));
     }
 
-    // --- Job Offers (Recruiter View) ---
     @Tag(name = "Job Offers", description = "Recruiter endpoints for offer management")
     @PostMapping("/offers")
     @Operation(summary = "Create a new job offer")
@@ -103,7 +102,6 @@ public class OfferAndMatchController {
         return ResponseEntity.ok().build();
     }
 
-    // --- Matches (Candidate View) ---
     @Tag(name = "Matches (Candidate)", description = "Candidate interactions with matched offers")
     @GetMapping("/candidates/me/matches")
     @Operation(summary = "List matched offers sorted by score")
@@ -140,7 +138,6 @@ public class OfferAndMatchController {
         return ResponseEntity.ok().build();
     }
 
-    // --- Matches (Recruiter View) ---
     @Tag(name = "Matches (Recruiter)", description = "Recruiter interactions with matched candidates")
     @GetMapping("/offers/{offerId}/candidates")
     @Operation(summary = "List matched candidates for a specific offer")
@@ -159,6 +156,4 @@ public class OfferAndMatchController {
             @PathVariable UUID candidateId) {
         return ResponseEntity.ok(matchService.getCandidateDetailForRecruiter(recruiterId, offerId, candidateId));
     }
-
 }
-

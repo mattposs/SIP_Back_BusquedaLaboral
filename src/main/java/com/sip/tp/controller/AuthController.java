@@ -3,7 +3,7 @@ package com.sip.tp.controller;
 import com.sip.tp.dto.request.LoginRequest;
 import com.sip.tp.dto.request.RegisterRequest;
 import com.sip.tp.dto.response.AuthResponse;
-import com.sip.tp.service.AuthService;
+import com.sip.tp.service.domain.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

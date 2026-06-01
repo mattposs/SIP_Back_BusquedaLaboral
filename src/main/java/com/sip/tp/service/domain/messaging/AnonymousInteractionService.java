@@ -1,16 +1,21 @@
-package com.sip.tp.service;
+package com.sip.tp.service.domain.messaging;
 
 import com.sip.tp.dto.message.AnonymousThreadDetailResponse;
 import com.sip.tp.dto.message.AnonymousThreadResponse;
-import com.sip.tp.entity.*;
+import com.sip.tp.entity.AnonymousMessage;
+import com.sip.tp.entity.AnonymousThread;
+import com.sip.tp.entity.Candidate;
+import com.sip.tp.entity.JobOffer;
+import com.sip.tp.entity.Match;
 import com.sip.tp.repository.AnonymousMessageRepository;
 import com.sip.tp.repository.AnonymousThreadRepository;
 import com.sip.tp.repository.CandidateRepository;
 import com.sip.tp.repository.JobOfferRepository;
 import com.sip.tp.types.definition.MatchStatus;
 import com.sip.tp.types.definition.SenderType;
-import com.sip.tp.types.definition.ThreadCategory;
 import com.sip.tp.types.definition.ThreadStatus;
+import com.sip.tp.util.converter.RequestConverter;
+import com.sip.tp.util.converter.ResponseConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,29 +33,25 @@ public class AnonymousInteractionService {
     private final AnonymousMessageRepository messageRepository;
     private final CandidateRepository candidateRepository;
     private final JobOfferRepository offerRepository;
+    private final RequestConverter requestConverter;
+    private final ResponseConverter responseConverter;
 
     @Transactional
     public UUID createThread(UUID candidateId, UUID offerId, String categoryCode, String initialMessage) {
         Candidate candidate = candidateRepository.getReferenceById(candidateId);
         JobOffer offer = offerRepository.getReferenceById(offerId);
 
-        ThreadCategory category = switch (categoryCode.toUpperCase()) {
-            case "SALARY" -> new ThreadCategory.Salary();
-            case "CULTURE" -> new ThreadCategory.Culture();
-            case "STACK" -> new ThreadCategory.Stack();
-            case "BENEFITS" -> new ThreadCategory.Benefits();
-            case "MODALITY" -> new ThreadCategory.Modality();
-            default -> new ThreadCategory.Other();
-        };
-
         String code = "#A-" + UUID.randomUUID().toString().substring(0, 4).toUpperCase();
 
         AnonymousThread thread = AnonymousThread.builder()
-                .candidate(candidate).offer(offer).category(category)
-                .status(new ThreadStatus.Pending()).anonymousCode(code).build();
+                .candidate(candidate)
+                .offer(offer)
+                .category(requestConverter.toThreadCategory(categoryCode))
+                .status(new ThreadStatus.Pending())
+                .anonymousCode(code)
+                .build();
 
         AnonymousThread saved = threadRepository.save(thread);
-
         sendMessageInternal(saved, new SenderType.Candidate(), initialMessage);
         return saved.getId();
     }
@@ -58,7 +59,7 @@ public class AnonymousInteractionService {
     @Transactional(readOnly = true)
     public List<AnonymousThreadResponse> getCandidateThreads(UUID candidateId) {
         return threadRepository.findAllByCandidateId(candidateId).stream()
-                .map(t -> new AnonymousThreadResponse(t.getId(), t.getAnonymousCode(), t.getCategory().code(), t.getStatus().code(), t.getCreatedAt()))
+                .map(responseConverter::toAnonymousThreadResponse)
                 .collect(Collectors.toList());
     }
 
@@ -69,18 +70,15 @@ public class AnonymousInteractionService {
         boolean isRecruiter = thread.getOffer().getRecruiter().getId().equals(requesterId);
         if (!isCandidate && !isRecruiter) throw new SecurityException("Unauthorized");
 
-        List<AnonymousThreadDetailResponse.AnonymousMessageResponse> messages = messageRepository.findAllByThreadIdOrderByCreatedAtAsc(threadId).stream()
-                .map(m -> new AnonymousThreadDetailResponse.AnonymousMessageResponse(m.getId(), m.getSenderType().code(), m.getContent(), m.getCreatedAt()))
-                .collect(Collectors.toList());
-        return new AnonymousThreadDetailResponse(thread.getId(), thread.getAnonymousCode(), thread.getCategory().code(),
-                thread.getStatus().code(), messages, thread.getCreatedAt());
+        List<AnonymousMessage> messages = messageRepository.findAllByThreadIdOrderByCreatedAtAsc(threadId);
+        return responseConverter.toAnonymousThreadDetailResponse(thread, messages);
     }
 
     @Transactional(readOnly = true)
     public List<AnonymousThreadResponse> getOfferThreads(UUID recruiterId, UUID offerId) {
         return threadRepository.findAllByOfferId(offerId).stream()
                 .filter(t -> t.getOffer().getRecruiter().getId().equals(recruiterId))
-                .map(t -> new AnonymousThreadResponse(t.getId(), t.getAnonymousCode(), t.getCategory().code(), t.getStatus().code(), t.getCreatedAt()))
+                .map(responseConverter::toAnonymousThreadResponse)
                 .collect(Collectors.toList());
     }
 
@@ -89,7 +87,6 @@ public class AnonymousInteractionService {
         AnonymousThread thread = threadRepository.findById(threadId).orElseThrow();
         SenderType senderType;
 
-        // Determine if sender is the candidate of the thread or the recruiter of the offer
         if (thread.getCandidate().getId().equals(senderId)) {
             senderType = new SenderType.Candidate();
         } else if (thread.getOffer().getRecruiter().getId().equals(senderId)) {
@@ -105,7 +102,10 @@ public class AnonymousInteractionService {
 
     private void sendMessageInternal(AnonymousThread thread, SenderType senderType, String content) {
         AnonymousMessage msg = AnonymousMessage.builder()
-                .thread(thread).senderType(senderType).content(content).build();
+                .thread(thread)
+                .senderType(senderType)
+                .content(content)
+                .build();
         messageRepository.save(msg);
     }
 
