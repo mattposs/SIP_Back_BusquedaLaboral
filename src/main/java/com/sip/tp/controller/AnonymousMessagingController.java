@@ -1,9 +1,9 @@
 package com.sip.tp.controller;
 
+import com.sip.tp.dto.message.AnonymousThreadDetailResponse;
+import com.sip.tp.dto.message.AnonymousThreadResponse;
 import com.sip.tp.dto.request.CreateThreadRequest;
 import com.sip.tp.dto.request.SendMessageRequest;
-import com.sip.tp.dto.message.AnonymousThreadResponse;
-import com.sip.tp.dto.message.AnonymousThreadDetailResponse;
 import com.sip.tp.service.AnonymousInteractionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

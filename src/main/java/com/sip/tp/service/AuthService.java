@@ -1,7 +1,7 @@
 package com.sip.tp.service;
 
-import com.sip.tp.dto.request.RegisterRequest;
 import com.sip.tp.dto.request.LoginRequest;
+import com.sip.tp.dto.request.RegisterRequest;
 import com.sip.tp.dto.response.AuthResponse;
 import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.Recruiter;

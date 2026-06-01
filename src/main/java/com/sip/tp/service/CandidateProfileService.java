@@ -1,8 +1,8 @@
 package com.sip.tp.service;
 
 import com.sip.tp.dto.request.ProfileUpdateRequest;
-import com.sip.tp.dto.request.WorkExperienceRequest;
 import com.sip.tp.dto.request.ProjectRequest;
+import com.sip.tp.dto.request.WorkExperienceRequest;
 import com.sip.tp.dto.response.CandidateProfileResponse;
 import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.Project;

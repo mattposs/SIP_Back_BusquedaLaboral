@@ -1,8 +1,8 @@
 package com.sip.tp.controller;
 
 import com.sip.tp.dto.request.AddSkillRequest;
-import com.sip.tp.dto.skill.SkillResponse;
 import com.sip.tp.dto.skill.CandidateSkillResponse;
+import com.sip.tp.dto.skill.SkillResponse;
 import com.sip.tp.service.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

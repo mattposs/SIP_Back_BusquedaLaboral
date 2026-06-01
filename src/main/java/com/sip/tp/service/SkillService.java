@@ -1,8 +1,8 @@
 package com.sip.tp.service;
 
 import com.sip.tp.dto.request.AddSkillRequest;
-import com.sip.tp.dto.skill.SkillResponse;
 import com.sip.tp.dto.skill.CandidateSkillResponse;
+import com.sip.tp.dto.skill.SkillResponse;
 import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.CandidateSkill;
 import com.sip.tp.entity.Skill;

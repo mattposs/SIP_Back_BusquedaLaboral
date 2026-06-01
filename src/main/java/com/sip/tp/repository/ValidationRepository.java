@@ -10,6 +10,8 @@ import java.util.UUID;
 @Repository
 public interface ValidationRepository extends JpaRepository<Validation, UUID> {
     List<Validation> findAllByCandidateIdAndSkillId(UUID candidateId, UUID skillId);
+
     List<Validation> findAllByValidatorId(UUID validatorId);
+
     List<Validation> findAllByCandidateId(UUID candidateId);
 }

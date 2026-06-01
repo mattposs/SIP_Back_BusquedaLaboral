@@ -1,9 +1,9 @@
 package com.sip.tp.service;
 
-import com.sip.tp.dto.request.ValidationRequestPayload;
 import com.sip.tp.dto.request.SubmitValidationRequest;
-import com.sip.tp.dto.validation.ValidationResponse;
+import com.sip.tp.dto.request.ValidationRequestPayload;
 import com.sip.tp.dto.validation.ValidationRequestResponse;
+import com.sip.tp.dto.validation.ValidationResponse;
 import com.sip.tp.entity.*;
 import com.sip.tp.repository.*;
 import com.sip.tp.types.definition.RelationType;
@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

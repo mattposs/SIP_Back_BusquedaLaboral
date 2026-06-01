@@ -10,6 +10,8 @@ import java.util.UUID;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, UUID> {
     List<Match> findAllByCandidateIdOrderByMatchScoreDesc(UUID candidateId);
+
     List<Match> findAllByOfferIdOrderByMatchScoreDesc(UUID offerId);
+
     java.util.Optional<Match> findByCandidateIdAndOfferId(UUID candidateId, UUID offerId);
 }

@@ -1,9 +1,9 @@
 package com.sip.tp.controller;
 
 import com.sip.tp.dto.request.ProfileUpdateRequest;
+import com.sip.tp.dto.request.ProjectRequest;
 import com.sip.tp.dto.request.VerifyIdentityRequest;
 import com.sip.tp.dto.request.WorkExperienceRequest;
-import com.sip.tp.dto.request.ProjectRequest;
 import com.sip.tp.dto.response.CompletionResponse;
 import com.sip.tp.service.CandidateProfileService;
 import io.swagger.v3.oas.annotations.Operation;

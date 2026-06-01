@@ -2,8 +2,8 @@ package com.sip.tp.controller;
 
 import com.sip.tp.dto.request.SubmitValidationRequest;
 import com.sip.tp.dto.request.ValidationRequestPayload;
-import com.sip.tp.dto.validation.ValidationResponse;
 import com.sip.tp.dto.validation.ValidationRequestResponse;
+import com.sip.tp.dto.validation.ValidationResponse;
 import com.sip.tp.service.ValidationFlowService;
 import com.sip.tp.service.ValidatorSuggestionService;
 import io.swagger.v3.oas.annotations.Operation;

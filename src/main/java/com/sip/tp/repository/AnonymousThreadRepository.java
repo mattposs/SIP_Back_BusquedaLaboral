@@ -10,5 +10,6 @@ import java.util.UUID;
 @Repository
 public interface AnonymousThreadRepository extends JpaRepository<AnonymousThread, UUID> {
     List<AnonymousThread> findAllByCandidateId(UUID candidateId);
+
     List<AnonymousThread> findAllByOfferId(UUID offerId);
 }
