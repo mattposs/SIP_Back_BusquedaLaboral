@@ -15,6 +15,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sip.tp.dto.response.ProjectResponse;
+import com.sip.tp.dto.response.WorkExperienceResponse;
+
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -62,6 +66,12 @@ public class CandidateController {
         return ResponseEntity.ok(candidateService.verifyIdentity(candidateId, request.dni(), request.tramiteNumber()));
     }
 
+    @GetMapping("/experience")
+    @Operation(summary = "Get all work experiences")
+    public ResponseEntity<List<WorkExperienceResponse>> getExperiences(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(candidateService.getWorkExperiences(candidateId));
+    }
+
     @PostMapping("/experience")
     @Operation(summary = "Add work experience")
     public ResponseEntity<UUID> addExperience(
@@ -87,6 +97,12 @@ public class CandidateController {
             @PathVariable UUID id) {
         candidateService.removeWorkExperience(candidateId, id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/projects")
+    @Operation(summary = "Get all projects")
+    public ResponseEntity<List<ProjectResponse>> getProjects(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(candidateService.getProjects(candidateId));
     }
 
     @PostMapping("/projects")

@@ -17,8 +17,15 @@ public record RegisterRequest(
         @NotBlank(message = "User type is required")
         String userType, // "CANDIDATE" or "RECRUITER"
 
-        @NotBlank(message = "Full name is required")
-        String fullName
+        String fullName,
+
+        String location,
+
+        String currentRole,
+
+        String companyName,
+
+        String website
 ) {
 }
 

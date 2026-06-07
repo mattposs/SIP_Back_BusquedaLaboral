@@ -65,7 +65,11 @@ public class ResponseConverter {
         );
     }
 
-    public JobOfferDetailResponse toJobOfferDetailResponse(JobOffer offer) {
+    public JobOfferDetailResponse toJobOfferDetailResponse(JobOffer offer, List<OfferSkill> offerSkills) {
+        List<com.sip.tp.dto.skill.OfferSkillResponse> skills = offerSkills.stream()
+                .map(this::toOfferSkillResponse)
+                .collect(Collectors.toList());
+
         return new JobOfferDetailResponse(
                 offer.getId(),
                 offer.getTitle(),
@@ -77,7 +81,26 @@ public class ResponseConverter {
                 offer.getBenefits(),
                 offer.getLocation(),
                 offer.getStatus().code(),
-                offer.getCreatedAt()
+                offer.getCreatedAt(),
+                skills
+        );
+    }
+
+    public com.sip.tp.dto.skill.OfferSkillResponse toOfferSkillResponse(OfferSkill offerSkill) {
+        return new com.sip.tp.dto.skill.OfferSkillResponse(
+                offerSkill.getSkill().getId(),
+                offerSkill.getSkill().getName(),
+                offerSkill.getSkill().getType().code(),
+                offerSkill.getRequirement().code()
+        );
+    }
+
+    public ProjectResponse toProjectResponse(Project project) {
+        return new ProjectResponse(
+                project.getId(),
+                project.getTitle(),
+                project.getDescription(),
+                project.getLink()
         );
     }
 
@@ -88,7 +111,9 @@ public class ResponseConverter {
     public CandidateSkillResponse toCandidateSkillResponse(CandidateSkill candidateSkill) {
         return new CandidateSkillResponse(
                 candidateSkill.getId(),
+                candidateSkill.getSkill().getId(),
                 candidateSkill.getSkill().getName(),
+                candidateSkill.getSkill().getType().code(),
                 candidateSkill.getExperienceRange().code(),
                 candidateSkill.getConsolidatedLevel() != null ? candidateSkill.getConsolidatedLevel().code() : null,
                 candidateSkill.getConsolidatedScore() != null ? candidateSkill.getConsolidatedScore().doubleValue() : null
@@ -139,14 +164,21 @@ public class ResponseConverter {
         );
     }
 
-    public MatchDetailResponse toMatchDetailResponse(Match match) {
+    public MatchDetailResponse toMatchDetailResponse(
+            Match match,
+            List<com.sip.tp.dto.match.MatchingSkillResponse> matchingSkills,
+            List<com.sip.tp.dto.match.MissingSkillResponse> missingSkills
+    ) {
         return new MatchDetailResponse(
                 match.getOffer().getId(),
                 match.getOffer().getTitle(),
                 match.getOffer().getCompany().getName(),
                 match.getMatchScore(),
                 match.getStatus().code(),
-                match.getProfileRevealed()
+                match.getProfileRevealed(),
+                match.getOffer().getDescription(),
+                matchingSkills,
+                missingSkills
         );
     }
 
@@ -163,6 +195,18 @@ public class ResponseConverter {
         }
 
         return new RecruiterCandidateMatchResponse(match.getId(), match.getMatchScore(), false, "Hidden Candidate", null, null);
+    }
+
+    public WorkExperienceResponse toWorkExperienceResponse(WorkExperience experience) {
+        return new WorkExperienceResponse(
+                experience.getId(),
+                experience.getCompany(),
+                experience.getPosition(),
+                experience.getStartDate(),
+                experience.getEndDate(),
+                experience.getIsCurrent(),
+                experience.getDescription()
+        );
     }
 
     public AnonymousThreadResponse toAnonymousThreadResponse(AnonymousThread thread) {

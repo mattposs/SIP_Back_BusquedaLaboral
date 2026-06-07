@@ -14,6 +14,8 @@ public interface CandidateSkillRepository extends JpaRepository<CandidateSkill, 
 
     List<CandidateSkill> findAllByCandidateId(UUID candidateId);
 
+    boolean existsByCandidateIdAndSkillId(UUID candidateId, UUID skillId);
+
     @Query("SELECT COUNT(cs) FROM CandidateSkill cs WHERE cs.candidate.id = :candidateId AND cs.consolidatedLevel IS NOT NULL")
     long countValidatedByCandidateId(UUID candidateId);
 }

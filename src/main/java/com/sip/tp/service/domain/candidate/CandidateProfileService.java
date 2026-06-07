@@ -5,6 +5,7 @@ import com.sip.tp.dto.request.ProjectRequest;
 import com.sip.tp.dto.request.WorkExperienceRequest;
 import com.sip.tp.dto.response.CandidateProfileResponse;
 import com.sip.tp.dto.response.CompletionResponse;
+import com.sip.tp.dto.response.ProjectResponse;
 import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.Project;
 import com.sip.tp.entity.WorkExperience;
@@ -18,7 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sip.tp.dto.response.WorkExperienceResponse;
+
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +78,13 @@ public class CandidateProfileService {
         return verified;
     }
 
+    @Transactional(readOnly = true)
+    public List<WorkExperienceResponse> getWorkExperiences(UUID candidateId) {
+        return experienceRepository.findAllByCandidateId(candidateId).stream()
+                .map(responseConverter::toWorkExperienceResponse)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public UUID addWorkExperience(UUID candidateId, WorkExperienceRequest request) {
         Candidate candidate = candidateRepository.findById(candidateId).orElseThrow();
@@ -95,6 +107,13 @@ public class CandidateProfileService {
         if (!experience.getCandidate().getId().equals(candidateId)) throw new SecurityException("Unauthorized");
         requestConverter.applyWorkExperienceUpdate(experience, request);
         experienceRepository.save(experience);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProjectResponse> getProjects(UUID candidateId) {
+        return projectRepository.findAllByCandidateId(candidateId).stream()
+                .map(responseConverter::toProjectResponse)
+                .collect(Collectors.toList());
     }
 
     @Transactional

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 
 @Component
 public class RequestConverter {
@@ -135,11 +137,21 @@ public class RequestConverter {
     }
 
     public void applyProfileUpdate(Candidate candidate, ProfileUpdateRequest request) {
-        candidate.setLocation(request.location());
-        candidate.setCurrentRoleTitle(request.currentRole());
-        candidate.setHeadline(request.headline());
-        candidate.setPhone(request.phone());
-        candidate.setLinkedIn(request.linkedIn());
+        if (request.location() != null) {
+            candidate.setLocation(request.location());
+        }
+        if (request.currentRole() != null) {
+            candidate.setCurrentRoleTitle(request.currentRole());
+        }
+        if (request.headline() != null) {
+            candidate.setHeadline(request.headline());
+        }
+        if (request.phone() != null) {
+            candidate.setPhone(request.phone());
+        }
+        if (request.linkedIn() != null) {
+            candidate.setLinkedIn(request.linkedIn());
+        }
     }
 
     public WorkExperience toWorkExperience(Candidate candidate, WorkExperienceRequest request) {
@@ -147,8 +159,8 @@ public class RequestConverter {
                 .candidate(candidate)
                 .company(request.company())
                 .position(request.position())
-                .startDate(LocalDate.parse(request.startDate()))
-                .endDate(request.endDate() != null ? LocalDate.parse(request.endDate()) : null)
+                .startDate(parseExperienceDate(request.startDate()))
+                .endDate(request.endDate() != null ? parseExperienceDate(request.endDate()) : null)
                 .isCurrent(request.isCurrent())
                 .description(request.description())
                 .build();
@@ -157,10 +169,43 @@ public class RequestConverter {
     public void applyWorkExperienceUpdate(WorkExperience experience, WorkExperienceRequest request) {
         experience.setCompany(request.company());
         experience.setPosition(request.position());
-        experience.setStartDate(LocalDate.parse(request.startDate()));
-        experience.setEndDate(request.endDate() != null ? LocalDate.parse(request.endDate()) : null);
+        experience.setStartDate(parseExperienceDate(request.startDate()));
+        experience.setEndDate(request.endDate() != null ? parseExperienceDate(request.endDate()) : null);
         experience.setIsCurrent(request.isCurrent());
         experience.setDescription(request.description());
+    }
+
+    public Requirement toRequirement(String value) {
+        if (value == null) {
+            return new Requirement.Required();
+        }
+        return switch (value.toUpperCase()) {
+            case "DESIRABLE" -> new Requirement.Desirable();
+            default -> new Requirement.Required();
+        };
+    }
+
+    public OfferSkill toOfferSkill(JobOffer offer, Skill skill, Requirement requirement) {
+        return OfferSkill.builder()
+                .id(new OfferSkillId(offer.getId(), skill.getId()))
+                .offer(offer)
+                .skill(skill)
+                .requirement(requirement)
+                .build();
+    }
+
+    private LocalDate parseExperienceDate(String value) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException("Date is required");
+        }
+        try {
+            if (value.length() == 7) {
+                return YearMonth.parse(value).atDay(1);
+            }
+            return LocalDate.parse(value);
+        } catch (DateTimeParseException ex) {
+            throw new IllegalArgumentException("Invalid date format: " + value);
+        }
     }
 
     public Project toProject(Candidate candidate, ProjectRequest request) {

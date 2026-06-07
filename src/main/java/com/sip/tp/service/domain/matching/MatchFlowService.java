@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class MatchFlowService {
 
     private final MatchRepository matchRepository;
+    private final MatchGenerationService matchGenerationService;
     private final AnonymousInteractionService interactionService;
     private final ResponseConverter responseConverter;
 
@@ -34,7 +35,11 @@ public class MatchFlowService {
     @Transactional(readOnly = true)
     public MatchDetailResponse getMatchDetail(UUID candidateId, UUID offerId) {
         Match match = findMatch(candidateId, offerId);
-        return responseConverter.toMatchDetailResponse(match);
+        return responseConverter.toMatchDetailResponse(
+                match,
+                matchGenerationService.getMatchingSkills(candidateId, offerId),
+                matchGenerationService.getMissingSkills(candidateId, offerId)
+        );
     }
 
     @Transactional(readOnly = true)
