@@ -30,8 +30,8 @@ public class SkillController {
 
     @GetMapping("/skills/suggestions")
     @Operation(summary = "Get suggested skills based on role")
-    public ResponseEntity<List<SkillResponse>> getSuggestedSkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
-        return ResponseEntity.ok(skillService.getSuggestedSkillsForCandidate(candidateId));
+    public ResponseEntity<List<SkillResponse>> getSuggestedSkills(@Parameter(hidden = true) @AuthenticationPrincipal UUID userId) {
+        return ResponseEntity.ok(skillService.getSuggestedSkills(userId));
     }
 
     @GetMapping("/candidates/me/skills")

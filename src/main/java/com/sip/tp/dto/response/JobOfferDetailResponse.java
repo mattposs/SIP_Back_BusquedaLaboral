@@ -1,12 +1,12 @@
 package com.sip.tp.dto.response;
 
+import com.sip.tp.dto.skill.OfferSkillResponse;
+
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
-/**
- * DTO for detailed job offer. Consolidated from JobOfferService
- */
 public record JobOfferDetailResponse(
         UUID id,
         String title,
@@ -18,7 +18,7 @@ public record JobOfferDetailResponse(
         String benefits,
         String location,
         String status,
-        Instant createdAt
+        Instant createdAt,
+        List<OfferSkillResponse> skills
 ) {
 }
-
