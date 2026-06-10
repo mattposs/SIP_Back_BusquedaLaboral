@@ -33,6 +33,7 @@ public class ValidationScoringService {
 
         List<SkillScoringCalculator.ValidationInput> inputs = new ArrayList<>(validations.size());
         for (Validation validation : validations) {
+            // TODO acá tendría que existir el usuario en el repositorio de reputación antes de intentar buscarlo
             ValidatorReputation reputation = reputationRepository.findById(validation.getValidator().getId())
                     .orElseThrow(() -> new IllegalStateException("Reputation profile not found for validator ID: " + validation.getValidator().getId()));
 

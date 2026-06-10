@@ -32,7 +32,7 @@ public class ValidatorSuggestionService {
         List<CandidateSkill> peersWithSkill = candidateSkillRepository.findAll().stream()
                 .filter(cs -> cs.getSkill().getId().equals(skillId))
                 .filter(cs -> !cs.getCandidate().getId().equals(requesterId))
-                .filter(cs -> cs.getConsolidatedLevel() != null)
+//                .filter(cs -> cs.getConsolidatedLevel() != null) // TODO: Verificar acá qué debería hacer
                 .toList();
 
         return peersWithSkill.stream()
