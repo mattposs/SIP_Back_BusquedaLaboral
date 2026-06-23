@@ -9,6 +9,7 @@ import com.sip.tp.service.domain.candidate.CandidateProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,7 +40,7 @@ public class CandidateController {
     @Operation(summary = "Update profile fields")
     public ResponseEntity<Void> updateProfile(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody ProfileUpdateRequest request) {
+            @RequestBody @Valid ProfileUpdateRequest request) {
         candidateService.updateProfile(candidateId, request);
         return ResponseEntity.ok().build();
     }
@@ -62,7 +63,7 @@ public class CandidateController {
     @Operation(summary = "Initiate RENAPER verification")
     public ResponseEntity<Boolean> verifyIdentity(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody VerifyIdentityRequest request) {
+            @RequestBody @Valid VerifyIdentityRequest request) {
         return ResponseEntity.ok(candidateService.verifyIdentity(candidateId, request.dni(), request.tramiteNumber()));
     }
 
@@ -76,7 +77,7 @@ public class CandidateController {
     @Operation(summary = "Add work experience")
     public ResponseEntity<UUID> addExperience(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody WorkExperienceRequest request) {
+            @RequestBody @Valid WorkExperienceRequest request) {
         return ResponseEntity.ok(candidateService.addWorkExperience(candidateId, request));
     }
 
@@ -85,7 +86,7 @@ public class CandidateController {
     public ResponseEntity<Void> updateExperience(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
             @PathVariable UUID id,
-            @RequestBody WorkExperienceRequest request) {
+            @RequestBody @Valid WorkExperienceRequest request) {
         candidateService.updateWorkExperience(candidateId, id, request);
         return ResponseEntity.ok().build();
     }
@@ -109,7 +110,7 @@ public class CandidateController {
     @Operation(summary = "Add project")
     public ResponseEntity<UUID> addProject(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody ProjectRequest request) {
+            @RequestBody @Valid ProjectRequest request) {
         return ResponseEntity.ok(candidateService.addProject(candidateId, request));
     }
 
@@ -118,7 +119,7 @@ public class CandidateController {
     public ResponseEntity<Void> updateProject(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
             @PathVariable UUID id,
-            @RequestBody ProjectRequest request) {
+            @RequestBody @Valid ProjectRequest request) {
         candidateService.updateProject(candidateId, id, request);
         return ResponseEntity.ok().build();
     }

@@ -14,6 +14,7 @@ import com.sip.tp.service.domain.recruiter.JobOfferService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,7 +36,7 @@ public class OfferAndMatchController {
     @Operation(summary = "Create a company (during recruiter onboarding)")
     public ResponseEntity<UUID> createCompany(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
-            @RequestBody CompanyRequest request) {
+            @RequestBody @Valid CompanyRequest request) {
         return ResponseEntity.ok(companyService.createCompany(recruiterId, request));
     }
 
@@ -45,7 +46,7 @@ public class OfferAndMatchController {
     public ResponseEntity<Void> updateCompany(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
             @PathVariable UUID id,
-            @RequestBody CompanyRequest request) {
+            @RequestBody @Valid CompanyRequest request) {
         companyService.updateCompany(recruiterId, id, request);
         return ResponseEntity.ok().build();
     }
@@ -62,7 +63,7 @@ public class OfferAndMatchController {
     @Operation(summary = "Create a new job offer")
     public ResponseEntity<UUID> createOffer(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
-            @RequestBody JobOfferRequest request) {
+            @RequestBody @Valid JobOfferRequest request) {
         return ResponseEntity.ok(jobOfferService.createOffer(recruiterId, request));
     }
 
@@ -87,7 +88,7 @@ public class OfferAndMatchController {
     public ResponseEntity<Void> updateOffer(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
             @PathVariable UUID id,
-            @RequestBody JobOfferRequest request) {
+            @RequestBody @Valid JobOfferRequest request) {
         jobOfferService.updateOffer(recruiterId, id, request);
         return ResponseEntity.ok().build();
     }

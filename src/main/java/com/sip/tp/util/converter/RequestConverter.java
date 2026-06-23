@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException;
 public class RequestConverter {
 
     public UserType toUserType(String value) {
+        if (value == null) throw new IllegalArgumentException("User type must not be null");
         return switch (value.toUpperCase()) {
             case "CANDIDATE" -> new UserType.Candidate();
             case "RECRUITER" -> new UserType.Recruiter();
@@ -33,6 +34,7 @@ public class RequestConverter {
     }
 
     public Industry toIndustry(String value) {
+        if (value == null) throw new IllegalArgumentException("Industry must not be null");
         return switch (value.toUpperCase()) {
             case "TECH" -> new Industry.Tech();
             case "FINANCE" -> new Industry.Finance();
@@ -43,6 +45,7 @@ public class RequestConverter {
     }
 
     public CompanySize toCompanySize(String value) {
+        if (value == null) throw new IllegalArgumentException("Company size must not be null");
         return switch (value) {
             case "1-10" -> new CompanySize.Size1To10();
             case "11-50" -> new CompanySize.Size11To50();
@@ -69,6 +72,7 @@ public class RequestConverter {
     }
 
     public Modality toModality(String value) {
+        if (value == null) throw new IllegalArgumentException("Modality must not be null");
         return switch (value.toUpperCase()) {
             case "REMOTE" -> new Modality.Remote();
             case "HYBRID" -> new Modality.Hybrid();
@@ -77,6 +81,7 @@ public class RequestConverter {
     }
 
     public Seniority toSeniority(String value) {
+        if (value == null) throw new IllegalArgumentException("Seniority must not be null");
         return switch (value.toUpperCase()) {
             case "JUNIOR" -> new Seniority.Junior();
             case "SEMI_SENIOR" -> new Seniority.SemiSenior();
@@ -86,6 +91,7 @@ public class RequestConverter {
     }
 
     public ExperienceRange toExperienceRange(String value) {
+        if (value == null) throw new IllegalArgumentException("Experience range must not be null");
         return switch (value) {
             case "<1 year" -> new ExperienceRange.LessThan1Year();
             case "1-3 years" -> new ExperienceRange.Years1To3();
@@ -97,6 +103,7 @@ public class RequestConverter {
     }
 
     public RequestStatus toRequestStatus(String value) {
+        if (value == null) throw new IllegalArgumentException("Request status must not be null");
         return switch (value.toUpperCase()) {
             case "COMPLETED" -> new RequestStatus.Completed();
             case "REJECTED" -> new RequestStatus.Rejected();
@@ -105,6 +112,7 @@ public class RequestConverter {
     }
 
     public RelationType toRelationType(String value) {
+        if (value == null) throw new IllegalArgumentException("Relation type must not be null");
         return switch (value.toUpperCase()) {
             case "COWORKER" -> new RelationType.Coworker();
             case "MANAGER" -> new RelationType.Manager();
@@ -116,6 +124,7 @@ public class RequestConverter {
     }
 
     public SkillLevel toSkillLevel(String value) {
+        if (value == null) throw new IllegalArgumentException("Skill level must not be null");
         return switch (value.toUpperCase()) {
             case "COLABORADOR" -> new SkillLevel.Colaborador();
             case "EJECUTOR_AUTONOMO" -> new SkillLevel.EjecutorAutonomo();
@@ -126,6 +135,7 @@ public class RequestConverter {
     }
 
     public ThreadCategory toThreadCategory(String value) {
+        if (value == null) throw new IllegalArgumentException("Thread category must not be null");
         return switch (value.toUpperCase()) {
             case "SALARY" -> new ThreadCategory.Salary();
             case "CULTURE" -> new ThreadCategory.Culture();

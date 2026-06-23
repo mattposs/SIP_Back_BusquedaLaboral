@@ -8,6 +8,7 @@ import com.sip.tp.service.domain.messaging.AnonymousInteractionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +29,7 @@ public class AnonymousMessagingController {
     @Operation(summary = "Candidate creates anonymous thread")
     public ResponseEntity<UUID> createThread(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody CreateThreadRequest request) {
+            @RequestBody @Valid CreateThreadRequest request) {
         return ResponseEntity.ok(messagingService.createThread(candidateId, request.offerId(), request.category(), request.message()));
     }
 
@@ -70,7 +71,7 @@ public class AnonymousMessagingController {
     public ResponseEntity<Void> sendMessage(
             @PathVariable UUID id,
             @Parameter(hidden = true) @AuthenticationPrincipal UUID senderId,
-            @RequestBody SendMessageRequest request) {
+            @RequestBody @Valid SendMessageRequest request) {
         messagingService.sendMessage(senderId, id, request.content());
         return ResponseEntity.ok().build();
     }

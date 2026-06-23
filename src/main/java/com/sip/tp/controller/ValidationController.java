@@ -9,6 +9,7 @@ import com.sip.tp.service.domain.validation.ValidatorSuggestionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -57,7 +58,7 @@ public class ValidationController {
     @Operation(summary = "Create a validation request")
     public ResponseEntity<Void> requestValidation(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody ValidationRequestPayload payload) {
+            @RequestBody @Valid ValidationRequestPayload payload) {
         validationService.createValidationRequest(candidateId, payload);
         return ResponseEntity.ok().build();
     }
@@ -74,7 +75,7 @@ public class ValidationController {
     @Operation(summary = "Submit a validation (Accept request)")
     public ResponseEntity<Void> submitValidation(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID validatorId,
-            @RequestBody SubmitValidationRequest request) {
+            @RequestBody @Valid SubmitValidationRequest request) {
         validationService.submitValidation(validatorId, request);
         return ResponseEntity.ok().build();
     }

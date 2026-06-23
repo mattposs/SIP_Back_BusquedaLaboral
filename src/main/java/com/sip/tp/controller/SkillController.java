@@ -7,6 +7,7 @@ import com.sip.tp.service.domain.candidate.SkillService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,7 +45,7 @@ public class SkillController {
     @Operation(summary = "Add a skill to profile")
     public ResponseEntity<Void> addSkill(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId,
-            @RequestBody AddSkillRequest request) {
+            @RequestBody @Valid AddSkillRequest request) {
         skillService.addSkillToCandidate(candidateId, request);
         return ResponseEntity.ok().build();
     }
