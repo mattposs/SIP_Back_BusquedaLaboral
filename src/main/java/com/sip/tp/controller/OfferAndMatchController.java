@@ -2,6 +2,7 @@ package com.sip.tp.controller;
 
 import com.sip.tp.dto.match.CandidateMatchResponse;
 import com.sip.tp.dto.match.MatchDetailResponse;
+import com.sip.tp.dto.match.RecruiterCandidateDetailResponse;
 import com.sip.tp.dto.match.RecruiterCandidateMatchResponse;
 import com.sip.tp.dto.request.CompanyRequest;
 import com.sip.tp.dto.request.JobOfferRequest;
@@ -159,7 +160,7 @@ public class OfferAndMatchController {
     @Tag(name = "Matches (Recruiter)")
     @GetMapping("/offers/{offerId}/candidates/{candidateId}")
     @Operation(summary = "Candidate detail (full if revealed, limited if not)")
-    public ResponseEntity<RecruiterCandidateMatchResponse> getCandidateDetailForRecruiter(
+    public ResponseEntity<RecruiterCandidateDetailResponse> getCandidateDetailForRecruiter(
             @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId,
             @PathVariable UUID offerId,
             @PathVariable UUID candidateId) {
