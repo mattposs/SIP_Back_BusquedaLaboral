@@ -158,7 +158,7 @@ public class MatchFlowService {
      * Builds CandidateValidatorDetailResponse list per §3.1:
      * One entry per (validatorId, skillId) pair — one per validation.
      */
-    private List<CandidateValidatorDetailResponse> buildValidatorDetails(UUID candidateId) {
+    public List<CandidateValidatorDetailResponse> buildValidatorDetails(UUID candidateId) {
         List<Validation> allValidations = validationRepository.findAllByCandidateId(candidateId);
 
         return allValidations.stream()

@@ -4,8 +4,10 @@ import com.sip.tp.dto.request.SubmitValidationRequest;
 import com.sip.tp.dto.request.ValidationRequestPayload;
 import com.sip.tp.dto.validation.ValidationRequestResponse;
 import com.sip.tp.dto.validation.ValidationResponse;
+import com.sip.tp.dto.match.CandidateValidatorDetailResponse;
 import com.sip.tp.service.domain.validation.ValidationFlowService;
 import com.sip.tp.service.domain.validation.ValidatorSuggestionService;
+import com.sip.tp.service.domain.matching.MatchFlowService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +27,7 @@ public class ValidationController {
 
     private final ValidationFlowService validationService;
     private final ValidatorSuggestionService suggestionService;
+    private final MatchFlowService matchFlowService;
 
     @GetMapping("/candidates/me/validations/given")
     @Operation(summary = "Validations I gave to others")
@@ -87,5 +90,12 @@ public class ValidationController {
             @PathVariable UUID id) {
         validationService.rejectValidationRequest(validatorId, id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/candidates/me/validators")
+    @Operation(summary = "List validators who validated the current candidate's skills")
+    public ResponseEntity<List<CandidateValidatorDetailResponse>> getMyValidators(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID candidateId) {
+        return ResponseEntity.ok(matchFlowService.buildValidatorDetails(candidateId));
     }
 }

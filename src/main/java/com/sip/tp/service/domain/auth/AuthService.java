@@ -7,10 +7,14 @@ import com.sip.tp.entity.Candidate;
 import com.sip.tp.entity.Company;
 import com.sip.tp.entity.Recruiter;
 import com.sip.tp.entity.UserData;
+import com.sip.tp.entity.ValidatorReputation;
 import com.sip.tp.repository.CandidateRepository;
 import com.sip.tp.repository.CompanyRepository;
 import com.sip.tp.repository.RecruiterRepository;
 import com.sip.tp.repository.UserRepository;
+import com.sip.tp.repository.ValidatorReputationRepository;
+import com.sip.tp.service.algorithm.ValidatorReputationCalculator;
+import com.sip.tp.types.definition.ReputationLevel;
 import com.sip.tp.types.definition.UserType;
 import com.sip.tp.util.converter.RequestConverter;
 import com.sip.tp.util.converter.ResponseConverter;
@@ -29,9 +33,11 @@ public class AuthService {
     private final CandidateRepository candidateRepository;
     private final RecruiterRepository recruiterRepository;
     private final CompanyRepository companyRepository;
+    private final ValidatorReputationRepository validatorReputationRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final ValidatorReputationCalculator validatorReputationCalculator;
     private final RequestConverter requestConverter;
     private final ResponseConverter responseConverter;
 
@@ -54,8 +60,21 @@ public class AuthService {
                 candidate.setIdentityVerified(false);
                 candidate.setProfileCompletion(0);
                 candidate.setLocation(request.location() != null ? request.location() : "Not Specified");
-                candidate.setCurrentRoleTitle(request.currentRole() != null ? request.currentRole() : "Not Specified");
+                String seniority = request.currentRole() != null ? request.currentRole() : "Not Specified";
+                candidate.setCurrentRoleTitle(seniority);
                 candidateRepository.save(candidate);
+
+                ValidatorReputation reputation = ValidatorReputation.builder()
+                        .candidate(candidate)
+                        .reputationLevel(new ReputationLevel.Bronce())
+                        .reputationScore(validatorReputationCalculator.calculateReputationScore(0, 0, 0))
+                        .platformYears(0)
+                        .totalValidations(0)
+                        .successRate(0)
+                        .seniority(seniority)
+                        .identityVerified(false)
+                        .build();
+                validatorReputationRepository.save(reputation);
             }
             case UserType.Recruiter r -> {
                 Company company = Company.builder()
