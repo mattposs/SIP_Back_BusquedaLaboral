@@ -14,6 +14,7 @@ import com.sip.tp.entity.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,10 +28,13 @@ public class ResponseConverter {
         return new CandidateProfileResponse(
                 candidate.getId(),
                 candidate.getFullName(),
+                candidate.getEmail(),
                 candidate.getLocation(),
                 candidate.getCurrentRoleTitle(),
                 candidate.getHeadline(),
                 candidate.getProfilePhoto(),
+                candidate.getPhone(),
+                candidate.getLinkedIn(),
                 candidate.getIdentityVerified(),
                 candidate.getProfileCompletion()
         );
@@ -182,19 +186,40 @@ public class ResponseConverter {
         );
     }
 
-    public RecruiterCandidateMatchResponse toRecruiterCandidateMatchResponse(Match match) {
+    public RecruiterCandidateMatchResponse toRecruiterCandidateMatchResponse(Match match, List<String> skillNames) {
+        Candidate candidate = match.getCandidate();
+        UUID offerId = match.getOffer().getId();
         if (match.getProfileRevealed()) {
             return new RecruiterCandidateMatchResponse(
                     match.getId(),
+                    candidate.getId(),
+                    offerId,
                     match.getMatchScore(),
                     true,
-                    match.getCandidate().getFullName(),
-                    match.getCandidate().getEmail(),
-                    match.getCandidate().getLinkedIn()
+                    candidate.getFullName(),
+                    candidate.getCurrentRoleTitle(),
+                    candidate.getLocation(),
+                    candidate.getIdentityVerified(),
+                    skillNames,
+                    candidate.getEmail(),
+                    candidate.getLinkedIn()
             );
         }
 
-        return new RecruiterCandidateMatchResponse(match.getId(), match.getMatchScore(), false, "Hidden Candidate", null, null);
+        return new RecruiterCandidateMatchResponse(
+                match.getId(),
+                candidate.getId(),
+                offerId,
+                match.getMatchScore(),
+                false,
+                null,
+                candidate.getCurrentRoleTitle(),
+                candidate.getLocation(),
+                candidate.getIdentityVerified(),
+                skillNames,
+                null,
+                null
+        );
     }
 
     public WorkExperienceResponse toWorkExperienceResponse(WorkExperience experience) {
@@ -215,6 +240,7 @@ public class ResponseConverter {
                 thread.getAnonymousCode(),
                 thread.getCategory().code(),
                 thread.getStatus().code(),
+                thread.getOffer().getId(),
                 thread.getCreatedAt()
         );
     }
@@ -229,6 +255,9 @@ public class ResponseConverter {
                 thread.getAnonymousCode(),
                 thread.getCategory().code(),
                 thread.getStatus().code(),
+                thread.getOffer().getId(),
+                thread.getOffer().getTitle(),
+                thread.getOffer().getCompany() != null ? thread.getOffer().getCompany().getName() : "",
                 mappedMessages,
                 thread.getCreatedAt()
         );

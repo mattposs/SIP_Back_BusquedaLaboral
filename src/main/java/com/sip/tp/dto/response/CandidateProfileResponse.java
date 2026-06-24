@@ -8,10 +8,13 @@ import java.util.UUID;
 public record CandidateProfileResponse(
         UUID id,
         String fullName,
+        String email,
         String location,
         String currentRole,
         String headline,
         String profilePhoto,
+        String phone,
+        String linkedIn,
         Boolean identityVerified,
         Integer profileCompletion
 ) {

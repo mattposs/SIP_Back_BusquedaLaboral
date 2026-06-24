@@ -34,8 +34,10 @@ public class AnonymousInteractionService {
 
     @Transactional
     public UUID createThread(UUID candidateId, UUID offerId, String categoryCode, String initialMessage) {
-        Candidate candidate = candidateRepository.getReferenceById(candidateId);
-        JobOffer offer = offerRepository.getReferenceById(offerId);
+        Candidate candidate = candidateRepository.findById(candidateId)
+                .orElseThrow(() -> new IllegalArgumentException("Candidate not found"));
+        JobOffer offer = offerRepository.findById(offerId)
+                .orElseThrow(() -> new IllegalArgumentException("Offer not found"));
 
         String code = "#A-" + UUID.randomUUID().toString().substring(0, 4).toUpperCase();
 
@@ -68,6 +70,13 @@ public class AnonymousInteractionService {
 
         List<AnonymousMessage> messages = messageRepository.findAllByThreadIdOrderByCreatedAtAsc(threadId);
         return responseConverter.toAnonymousThreadDetailResponse(thread, messages);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AnonymousThreadResponse> getRecruiterThreads(UUID recruiterId) {
+        return threadRepository.findAllByOfferRecruiterId(recruiterId).stream()
+                .map(responseConverter::toAnonymousThreadResponse)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

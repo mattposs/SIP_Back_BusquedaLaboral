@@ -139,6 +139,14 @@ public class OfferAndMatchController {
     }
 
     @Tag(name = "Matches (Recruiter)", description = "Recruiter interactions with matched candidates")
+    @GetMapping("/recruiters/me/candidates")
+    @Operation(summary = "List all matched candidates across all recruiter offers")
+    public ResponseEntity<List<RecruiterCandidateMatchResponse>> getAllRecruiterCandidates(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId) {
+        return ResponseEntity.ok(matchService.getAllRecruiterCandidates(recruiterId));
+    }
+
+    @Tag(name = "Matches (Recruiter)")
     @GetMapping("/offers/{offerId}/candidates")
     @Operation(summary = "List matched candidates for a specific offer")
     public ResponseEntity<List<RecruiterCandidateMatchResponse>> getMatchedCandidatesForOffer(

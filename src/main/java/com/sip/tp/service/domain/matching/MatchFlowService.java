@@ -3,7 +3,9 @@ package com.sip.tp.service.domain.matching;
 import com.sip.tp.dto.match.CandidateMatchResponse;
 import com.sip.tp.dto.match.MatchDetailResponse;
 import com.sip.tp.dto.match.RecruiterCandidateMatchResponse;
+import com.sip.tp.entity.CandidateSkill;
 import com.sip.tp.entity.Match;
+import com.sip.tp.repository.CandidateSkillRepository;
 import com.sip.tp.repository.MatchRepository;
 import com.sip.tp.service.domain.messaging.AnonymousInteractionService;
 import com.sip.tp.types.definition.MatchStatus;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class MatchFlowService {
 
     private final MatchRepository matchRepository;
+    private final CandidateSkillRepository candidateSkillRepository;
     private final MatchGenerationService matchGenerationService;
     private final AnonymousInteractionService interactionService;
     private final ResponseConverter responseConverter;
@@ -43,10 +46,17 @@ public class MatchFlowService {
     }
 
     @Transactional(readOnly = true)
+    public List<RecruiterCandidateMatchResponse> getAllRecruiterCandidates(UUID recruiterId) {
+        return matchRepository.findAllByOfferRecruiterIdOrderByMatchScoreDesc(recruiterId).stream()
+                .map(m -> responseConverter.toRecruiterCandidateMatchResponse(m, getSkillNames(m.getCandidate().getId())))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<RecruiterCandidateMatchResponse> getMatchedCandidatesForOffer(UUID recruiterId, UUID offerId) {
         return matchRepository.findAllByOfferIdOrderByMatchScoreDesc(offerId).stream()
                 .filter(m -> m.getOffer().getRecruiter().getId().equals(recruiterId))
-                .map(responseConverter::toRecruiterCandidateMatchResponse)
+                .map(m -> responseConverter.toRecruiterCandidateMatchResponse(m, getSkillNames(m.getCandidate().getId())))
                 .collect(Collectors.toList());
     }
 
@@ -55,7 +65,13 @@ public class MatchFlowService {
         Match match = matchRepository.findByCandidateIdAndOfferId(candidateId, offerId)
                 .orElseThrow(() -> new IllegalArgumentException("Match not found"));
         if (!match.getOffer().getRecruiter().getId().equals(recruiterId)) throw new SecurityException("Unauthorized");
-        return responseConverter.toRecruiterCandidateMatchResponse(match);
+        return responseConverter.toRecruiterCandidateMatchResponse(match, getSkillNames(candidateId));
+    }
+
+    private List<String> getSkillNames(UUID candidateId) {
+        return candidateSkillRepository.findAllByCandidateId(candidateId).stream()
+                .map(cs -> cs.getSkill().getName())
+                .collect(Collectors.toList());
     }
 
     @Transactional

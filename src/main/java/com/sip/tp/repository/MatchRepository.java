@@ -14,4 +14,6 @@ public interface MatchRepository extends JpaRepository<Match, UUID> {
     List<Match> findAllByOfferIdOrderByMatchScoreDesc(UUID offerId);
 
     java.util.Optional<Match> findByCandidateIdAndOfferId(UUID candidateId, UUID offerId);
+
+    List<Match> findAllByOfferRecruiterIdOrderByMatchScoreDesc(UUID recruiterId);
 }

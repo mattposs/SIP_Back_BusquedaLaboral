@@ -11,6 +11,7 @@ public record AnonymousThreadResponse(
         String anonymousCode,
         String category,
         String status,
+        UUID offerId,
         Instant createdAt
 ) {
 }
