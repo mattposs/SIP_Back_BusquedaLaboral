@@ -12,4 +12,6 @@ public interface AnonymousThreadRepository extends JpaRepository<AnonymousThread
     List<AnonymousThread> findAllByCandidateId(UUID candidateId);
 
     List<AnonymousThread> findAllByOfferId(UUID offerId);
+
+    List<AnonymousThread> findAllByOfferRecruiterId(UUID recruiterId);
 }

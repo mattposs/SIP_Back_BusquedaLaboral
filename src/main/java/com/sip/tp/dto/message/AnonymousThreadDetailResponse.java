@@ -12,6 +12,9 @@ public record AnonymousThreadDetailResponse(
         String anonymousCode,
         String category,
         String status,
+        UUID offerId,
+        String offerTitle,
+        String companyName,
         List<AnonymousMessageResponse> messages,
         Instant createdAt
 ) {

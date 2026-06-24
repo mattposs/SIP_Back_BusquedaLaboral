@@ -48,6 +48,13 @@ public class AnonymousMessagingController {
     }
 
     // --- Recruiter Endpoints ---
+    @GetMapping("/recruiters/me/anonymous-threads")
+    @Operation(summary = "Recruiter sees all anonymous threads across their offers")
+    public ResponseEntity<List<AnonymousThreadResponse>> getRecruiterThreads(
+            @Parameter(hidden = true) @AuthenticationPrincipal UUID recruiterId) {
+        return ResponseEntity.ok(messagingService.getRecruiterThreads(recruiterId));
+    }
+
     @GetMapping("/offers/{offerId}/anonymous-threads")
     @Operation(summary = "Recruiter sees anonymous threads for their offer")
     public ResponseEntity<List<AnonymousThreadResponse>> getOfferThreads(
