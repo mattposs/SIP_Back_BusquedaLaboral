@@ -9,7 +9,8 @@ spring:
     virtual:
       enabled: true
   jpa:
-    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
 
 management:
   otlp:
