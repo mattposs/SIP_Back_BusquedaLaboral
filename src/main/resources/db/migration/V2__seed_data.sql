@@ -97,7 +97,18 @@ VALUES
 ('20000000-0000-0000-0000-000000000081', 'Emotional Intelligence',         'SOFT'),
 ('20000000-0000-0000-0000-000000000082', 'Creativity',                     'SOFT'),
 ('20000000-0000-0000-0000-000000000083', 'Decision Making',                'SOFT'),
-('20000000-0000-0000-0000-000000000084', 'Cross-functional Collaboration', 'SOFT')
+('20000000-0000-0000-0000-000000000084', 'Cross-functional Collaboration', 'SOFT'),
+-- Habilidades de Marketing Digital (Demo Final)
+('20000000-0000-0000-0000-000000000085', 'Marketing Digital',              'TECH'),
+('20000000-0000-0000-0000-000000000086', 'Gestión de Redes Sociales',      'TECH'),
+('20000000-0000-0000-0000-000000000087', 'Meta Ads',                       'TECH'),
+('20000000-0000-0000-0000-000000000088', 'Google Analytics',               'TECH'),
+('20000000-0000-0000-0000-000000000089', 'Análisis de Métricas',           'TECH'),
+('20000000-0000-0000-0000-000000000090', 'Gestión de Campañas Digitales',  'TECH'),
+('20000000-0000-0000-0000-000000000091', 'Google Ads',                     'TECH'),
+('20000000-0000-0000-0000-000000000092', 'SEO',                            'TECH'),
+-- Trabajo en Equipo en español (alias de Teamwork para la demo)
+('20000000-0000-0000-0000-000000000093', 'Trabajo en Equipo',              'SOFT')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -112,7 +123,11 @@ VALUES
  'logo_datos.png', 'Soluciones de Datos LLC', '201-1000', 'https://solucionesdatos.com'),
 ('50000000-0000-0000-0000-000000000003', '2023-03-01 10:00:00+00',
  'Cultura startup de ritmo acelerado, obsesionada con el cliente.', 'ECOMMERCE', TRUE,
- 'logo_digi.png', 'DigiCommerce S.R.L.', '11-50', 'https://digicommerce.com')
+ 'logo_digi.png', 'DigiCommerce S.R.L.', '11-50', 'https://digicommerce.com'),
+-- TechNova (Demo Final)
+('50000000-0000-0000-0000-000000000004', '2023-04-01 10:00:00+00',
+ 'Empresa tecnológica enfocada en soluciones SaaS para pequeñas y medianas empresas, con un equipo de Marketing Digital dedicado a adquisición de usuarios, campañas de performance y analítica.', 'TECH', TRUE,
+ 'logo_technova.png', 'TechNova', '51-200', 'https://technova.com')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -134,10 +149,16 @@ VALUES
 ('10000000-0000-0000-0000-000000000008', '2023-01-08 10:00:00+00', 'helena@example.com',     '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
 ('10000000-0000-0000-0000-000000000009', '2023-01-09 10:00:00+00', 'ignacio@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
 ('10000000-0000-0000-0000-000000000010', '2023-01-10 10:00:00+00', 'julieta@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
+-- Candidatos Demo Final
+('10000000-0000-0000-0000-000000000011', '2023-04-01 10:00:00+00', 'martina@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
+('10000000-0000-0000-0000-000000000012', '2023-04-01 10:00:00+00', 'tomas@example.com',      '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
+('10000000-0000-0000-0000-000000000013', '2023-04-01 10:00:00+00', 'leandro@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
 -- Reclutadores
 ('60000000-0000-0000-0000-000000000001', '2023-01-01 10:00:00+00', 'rrhh@innovaciontec.com',       '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER'),
 ('60000000-0000-0000-0000-000000000002', '2023-01-15 10:00:00+00', 'seleccion@solucionesdatos.com', '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER'),
-('60000000-0000-0000-0000-000000000003', '2023-03-01 10:00:00+00', 'contratacion@digicommerce.com', '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER')
+('60000000-0000-0000-0000-000000000003', '2023-03-01 10:00:00+00', 'contratacion@digicommerce.com', '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER'),
+-- Reclutadora TechNova (Demo Final)
+('60000000-0000-0000-0000-000000000004', '2023-04-01 10:00:00+00', 'laura.fernandez@technova.com',  '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -168,7 +189,14 @@ VALUES
 ('10000000-0000-0000-0000-000000000009', 'Ingeniero DevOps',           'Ignacio Romero',
  'Automatizando todo el ciclo de vida del software.',         TRUE,  'linkedin.com/in/ignacioromero',    'San José, Costa Rica',     '+506-8888-9999',  100, 'ignacio.jpg'),
 ('10000000-0000-0000-0000-000000000010', 'Líder Técnico',              'Julieta Torres',
- 'Liderando equipos de ingeniería de alto rendimiento.',      TRUE,  'linkedin.com/in/julietatorres',    'Remoto',                   '+34-600-000-010', 100, 'julieta.jpg')
+ 'Liderando equipos de ingeniería de alto rendimiento.',      TRUE,  'linkedin.com/in/julietatorres',    'Remoto',                   '+34-600-000-010', 100, 'julieta.jpg'),
+-- Candidatos Demo Final
+('10000000-0000-0000-0000-000000000011', 'Estudiante de Marketing',    'Martina López',
+ 'Estudiante de Marketing apasionada por el marketing digital y el análisis de datos. Durante una pasantía participé en campañas digitales, gestión de redes sociales y elaboración de reportes. Busco mi primera experiencia laboral efectiva.', TRUE, 'linkedin.com/in/martinalopez', 'Buenos Aires, Argentina', '+54-11-5555-1111', 90, 'martina.jpg'),
+('10000000-0000-0000-0000-000000000012', 'Estudiante de Marketing',    'Tomás Fernández',
+ 'Estudiante de Marketing. Compañero de facultad.',           TRUE,  'linkedin.com/in/tomasfernandez',   'Buenos Aires, Argentina', '+54-11-5555-2222', 70, 'tomas.jpg'),
+('10000000-0000-0000-0000-000000000013', 'Especialista Marketing Digital', 'Leandro Gómez',
+ 'Especialista en Marketing Digital con experiencia en campañas de performance.', TRUE, 'linkedin.com/in/leandrogomez', 'Buenos Aires, Argentina', '+54-11-5555-3333', 85, 'leandro.jpg')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -177,7 +205,9 @@ INSERT INTO recruiter (id, company_id)
 VALUES
 ('60000000-0000-0000-0000-000000000001', '50000000-0000-0000-0000-000000000001'),
 ('60000000-0000-0000-0000-000000000002', '50000000-0000-0000-0000-000000000002'),
-('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000003')
+('60000000-0000-0000-0000-000000000003', '50000000-0000-0000-0000-000000000003'),
+-- Reclutadora TechNova (Demo Final)
+('60000000-0000-0000-0000-000000000004', '50000000-0000-0000-0000-000000000004')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -207,7 +237,10 @@ VALUES
 ('30000000-0000-0000-0000-000000000009', '10000000-0000-0000-0000-000000000009',
  'Comercio Electrónico S.A.', 'Configuración de pipelines CI/CD y automatización.',               'Ingeniero DevOps',          '2019-11-01', NULL,         TRUE),
 ('30000000-0000-0000-0000-000000000010', '10000000-0000-0000-0000-000000000010',
- 'Empresa Tech',              'Mentoría y liderazgo de un equipo de 15 ingenieros.',               'Líder Técnico',             '2014-07-01', NULL,         TRUE)
+ 'Empresa Tech',              'Mentoría y liderazgo de un equipo de 15 ingenieros.',               'Líder Técnico',             '2014-07-01', NULL,         TRUE),
+-- Experiencia Martina López (Demo Final)
+('30000000-0000-0000-0000-000000000011', '10000000-0000-0000-0000-000000000011',
+ 'Agencia Nova Marketing',    'Gestión de campañas, gestión de redes sociales, elaboración de reportes, análisis de métricas, seguimiento de campañas.', 'Pasante', '2023-06-01', '2023-12-01', FALSE)
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -329,7 +362,39 @@ VALUES
 ('25000000-0000-0000-0000-000000000047', '10000000-0000-0000-0000-000000000010',
  '20000000-0000-0000-0000-000000000075', 'REFERENTE',         9.40, '10+ years',  '2023-01-10 10:00:00+00'),
 ('25000000-0000-0000-0000-000000000048', '10000000-0000-0000-0000-000000000010',
- '20000000-0000-0000-0000-000000000076', 'LIDER',             8.90, '7-10 years', '2023-01-10 10:00:00+00')
+ '20000000-0000-0000-0000-000000000076', 'LIDER',             8.90, '7-10 years', '2023-01-10 10:00:00+00'),
+
+-- Martina López: Habilidades de Marketing Digital (Demo Final)
+('25000000-0000-0000-0000-000000000049', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000085', 'COLABORADOR',       6.50, '<1 year',    '2023-04-01 10:00:00+00'),  -- Marketing Digital
+('25000000-0000-0000-0000-000000000050', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000086', 'COLABORADOR',       6.00, '<1 year',    '2023-04-01 10:00:00+00'),  -- Gestión de Redes Sociales
+('25000000-0000-0000-0000-000000000051', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000087', 'COLABORADOR',       5.80, '<1 year',    '2023-04-01 10:00:00+00'),  -- Meta Ads
+('25000000-0000-0000-0000-000000000052', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000088', 'COLABORADOR',       6.20, '<1 year',    '2023-04-01 10:00:00+00'),  -- Google Analytics
+('25000000-0000-0000-0000-000000000053', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000089', 'COLABORADOR',       6.00, '<1 year',    '2023-04-01 10:00:00+00'),  -- Análisis de Métricas
+('25000000-0000-0000-0000-000000000054', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000093', 'COLABORADOR',       5.50, '<1 year',    '2023-04-01 10:00:00+00'),  -- Trabajo en Equipo
+('25000000-0000-0000-0000-000000000055', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000090', 'COLABORADOR',       5.00, '<1 year',    '2023-04-01 10:00:00+00'),  -- Gestión de Campañas Digitales
+
+-- Leandro Gómez: Habilidades de Marketing Digital (Demo Final - validador sugerido)
+('25000000-0000-0000-0000-000000000056', '10000000-0000-0000-0000-000000000013',
+ '20000000-0000-0000-0000-000000000085', 'LIDER',             8.50, '4-6 years',  '2023-04-01 10:00:00+00'),  -- Marketing Digital
+('25000000-0000-0000-0000-000000000057', '10000000-0000-0000-0000-000000000013',
+ '20000000-0000-0000-0000-000000000090', 'EJECUTOR_AUTONOMO', 7.80, '1-3 years',  '2023-04-01 10:00:00+00'),  -- Gestión de Campañas Digitales
+('25000000-0000-0000-0000-000000000058', '10000000-0000-0000-0000-000000000013',
+ '20000000-0000-0000-0000-000000000091', 'EJECUTOR_AUTONOMO', 7.50, '1-3 years',  '2023-04-01 10:00:00+00'),  -- Google Ads
+('25000000-0000-0000-0000-000000000059', '10000000-0000-0000-0000-000000000013',
+ '20000000-0000-0000-0000-000000000092', 'EJECUTOR_AUTONOMO', 7.00, '1-3 years',  '2023-04-01 10:00:00+00'),  -- SEO
+
+-- Tomás Fernández: Habilidades (Demo Final - validador)
+('25000000-0000-0000-0000-000000000060', '10000000-0000-0000-0000-000000000012',
+ '20000000-0000-0000-0000-000000000085', 'COLABORADOR',       5.50, '<1 year',    '2023-04-01 10:00:00+00'),  -- Marketing Digital
+('25000000-0000-0000-0000-000000000061', '10000000-0000-0000-0000-000000000012',
+ '20000000-0000-0000-0000-000000000093', 'COLABORADOR',       6.00, '<1 year',    '2023-04-01 10:00:00+00')   -- Trabajo en Equipo
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -359,7 +424,9 @@ VALUES
 ('10000000-0000-0000-0000-000000000001', TRUE,  3, 'PLATA',   3.50, 'SENIOR', 88,  8),
 ('10000000-0000-0000-0000-000000000010', TRUE,  8, 'PLATINO', 4.95, 'SENIOR', 98, 50),
 ('10000000-0000-0000-0000-000000000004', TRUE,  4, 'ORO',     4.20, 'SENIOR', 92, 15),
-('10000000-0000-0000-0000-000000000008', TRUE,  6, 'ORO',     4.50, 'SENIOR', 90, 18)
+('10000000-0000-0000-0000-000000000008', TRUE,  6, 'ORO',     4.50, 'SENIOR', 90, 18),
+-- Leandro Gómez - validador sugerido (Demo Final)
+('10000000-0000-0000-0000-000000000013', TRUE,  3, 'PLATA',   3.80, 'SEMI_SENIOR', 90, 10)
 ON CONFLICT (user_id) DO NOTHING;
 
 
@@ -403,7 +470,15 @@ VALUES
  'Desarrollador/a Full Stack',
  'Construí y mantené nuestra plataforma de e-commerce.',
  'Descuentos para empleados, plan de salud.',
- 'Lima (Híbrido)', 'HYBRID', 35000.00, 50000.00, 'SEMI_SENIOR', 'CLOSED')
+ 'Lima (Híbrido)', 'HYBRID', 35000.00, 50000.00, 'SEMI_SENIOR', 'CLOSED'),
+
+-- Oferta TechNova - Analista Junior de Marketing Digital (Demo Final)
+('70000000-0000-0000-0000-000000000006', '50000000-0000-0000-0000-000000000004',
+ '60000000-0000-0000-0000-000000000004', '2023-04-15 10:00:00+00',
+ 'Analista Junior de Marketing Digital',
+ 'Buscamos una persona con ganas de desarrollarse en Marketing Digital. Participará en campañas digitales, optimización de anuncios, análisis de métricas y elaboración de reportes. Valoramos personas con iniciativa, pensamiento analítico y trabajo colaborativo.',
+ 'Modalidad híbrida (3 días remoto, 2 presencial), capacitación continua, obra social.',
+ 'Buenos Aires', 'HYBRID', 2100.00, 2500.00, 'JUNIOR', 'PUBLISHED')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -428,7 +503,17 @@ VALUES
 ('70000000-0000-0000-0000-000000000004', '20000000-0000-0000-0000-000000000043', 'DESIRABLE'),
 ('70000000-0000-0000-0000-000000000005', '20000000-0000-0000-0000-000000000010', 'REQUIRED'),
 ('70000000-0000-0000-0000-000000000005', '20000000-0000-0000-0000-000000000001', 'REQUIRED'),
-('70000000-0000-0000-0000-000000000005', '20000000-0000-0000-0000-000000000036', 'DESIRABLE')
+('70000000-0000-0000-0000-000000000005', '20000000-0000-0000-0000-000000000036', 'DESIRABLE'),
+-- Habilidades requeridas para oferta Marketing Digital TechNova (Demo Final)
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000085', 'REQUIRED'),  -- Marketing Digital
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000086', 'REQUIRED'),  -- Gestión de Redes Sociales
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000087', 'REQUIRED'),  -- Meta Ads
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000088', 'REQUIRED'),  -- Google Analytics
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000089', 'REQUIRED'),  -- Análisis de Métricas
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000093', 'REQUIRED'),  -- Trabajo en Equipo
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000090', 'DESIRABLE'), -- Gestión de Campañas Digitales
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000091', 'DESIRABLE'), -- Google Ads
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000092', 'DESIRABLE')  -- SEO
 ON CONFLICT (offer_id, skill_id) DO NOTHING;
 
 
@@ -444,7 +529,10 @@ VALUES
 ('80000000-0000-0000-0000-000000000004', '10000000-0000-0000-0000-000000000009',
  '70000000-0000-0000-0000-000000000004', '2023-03-12 10:00:00+00', 85, FALSE, NULL, 'NOT_INTERESTED'),
 ('80000000-0000-0000-0000-000000000005', '10000000-0000-0000-0000-000000000006',
- '70000000-0000-0000-0000-000000000005', '2023-02-01 10:00:00+00', 78, TRUE,  '2023-02-10 14:00:00+00', 'INTERESTED')
+ '70000000-0000-0000-0000-000000000005', '2023-02-01 10:00:00+00', 78, TRUE,  '2023-02-10 14:00:00+00', 'INTERESTED'),
+-- Match Martina con oferta TechNova (Demo Final) - 78% coincidencia
+('80000000-0000-0000-0000-000000000006', '10000000-0000-0000-0000-000000000011',
+ '70000000-0000-0000-0000-000000000006', '2023-04-16 10:00:00+00', 78, FALSE, NULL, 'SUGGESTED')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -541,6 +629,42 @@ VALUES
  '20000000-0000-0000-0000-000000000070', '10000000-0000-0000-0000-000000000001',
  '2023-03-25 10:00:00+00',
  'Hola Alicia, resolvimos juntas varios incidentes críticos. ¿Podrías validar mi resolución de problemas?',
+ 'COWORKER', 'COMPLETED'),
+
+-- ========== Validaciones Demo Final ==========
+
+-- Tomás le pide a Martina que valide su Trabajo en Equipo (PENDIENTE - Demo Final)
+('B0000000-0000-0000-0000-000000000009', '10000000-0000-0000-0000-000000000012',
+ '20000000-0000-0000-0000-000000000093', '10000000-0000-0000-0000-000000000011',
+ '2023-04-20 10:00:00+00',
+ 'Hola Martina, trabajamos juntos en varios proyectos de la facultad. ¿Podrías validar mi habilidad de trabajo en equipo?',
+ 'CLASSMATE', 'PENDING'),
+
+-- Solicitudes de validación completadas para las habilidades de Martina (5 habilidades ya validadas)
+('B0000000-0000-0000-0000-000000000010', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000085', '10000000-0000-0000-0000-000000000013',
+ '2023-04-01 10:00:00+00',
+ 'Hola Leandro, trabajamos juntos en la pasantía. ¿Podrías validar mi habilidad en Marketing Digital?',
+ 'COWORKER', 'COMPLETED'),
+('B0000000-0000-0000-0000-000000000011', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000086', '10000000-0000-0000-0000-000000000013',
+ '2023-04-02 10:00:00+00',
+ 'Hola Leandro, ¿podrías también validar mi gestión de redes sociales?',
+ 'COWORKER', 'COMPLETED'),
+('B0000000-0000-0000-0000-000000000012', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000087', '10000000-0000-0000-0000-000000000013',
+ '2023-04-03 10:00:00+00',
+ 'Hola Leandro, ¿podrías validar mi experiencia con Meta Ads?',
+ 'COWORKER', 'COMPLETED'),
+('B0000000-0000-0000-0000-000000000013', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000088', '10000000-0000-0000-0000-000000000013',
+ '2023-04-04 10:00:00+00',
+ 'Hola Leandro, ¿podrías validar mi uso de Google Analytics?',
+ 'COWORKER', 'COMPLETED'),
+('B0000000-0000-0000-0000-000000000014', '10000000-0000-0000-0000-000000000011',
+ '20000000-0000-0000-0000-000000000089', '10000000-0000-0000-0000-000000000013',
+ '2023-04-05 10:00:00+00',
+ 'Hola Leandro, ¿podrías validar mi capacidad de análisis de métricas?',
  'COWORKER', 'COMPLETED')
 ON CONFLICT (id) DO NOTHING;
 
@@ -603,6 +727,49 @@ VALUES
  '10000000-0000-0000-0000-000000000001',
  'LIDER',
  'Helena resuelve problemas complejos de base de datos con método y rapidez. Lidera la resolución en incidentes críticos.',
- '2023-03-26 10:00:00+00')
+ '2023-03-26 10:00:00+00'),
+
+-- ========== Validaciones de Martina (Demo Final) ==========
+-- Leandro valida las 5 habilidades de Martina
+
+-- Leandro valida Marketing Digital de Martina
+('C0000000-0000-0000-0000-000000000008', 'B0000000-0000-0000-0000-000000000010',
+ '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000085',
+ '10000000-0000-0000-0000-000000000013',
+ 'COLABORADOR',
+ 'Martina demostró durante su pasantía un buen entendimiento de los fundamentos del marketing digital. Tiene potencial para crecer.',
+ '2023-04-02 10:00:00+00'),
+
+-- Leandro valida Gestión de Redes Sociales de Martina
+('C0000000-0000-0000-0000-000000000009', 'B0000000-0000-0000-0000-000000000011',
+ '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000086',
+ '10000000-0000-0000-0000-000000000013',
+ 'COLABORADOR',
+ 'Martina gestionó las redes sociales de varios clientes durante la pasantía con buenos resultados.',
+ '2023-04-03 10:00:00+00'),
+
+-- Leandro valida Meta Ads de Martina
+('C0000000-0000-0000-0000-000000000010', 'B0000000-0000-0000-0000-000000000012',
+ '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000087',
+ '10000000-0000-0000-0000-000000000013',
+ 'COLABORADOR',
+ 'Martina colaboró en campañas de Meta Ads, aprendiendo rápidamente a optimizar anuncios.',
+ '2023-04-04 10:00:00+00'),
+
+-- Leandro valida Google Analytics de Martina
+('C0000000-0000-0000-0000-000000000011', 'B0000000-0000-0000-0000-000000000013',
+ '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000088',
+ '10000000-0000-0000-0000-000000000013',
+ 'COLABORADOR',
+ 'Martina utilizó Google Analytics para elaborar reportes de rendimiento de campañas.',
+ '2023-04-05 10:00:00+00'),
+
+-- Leandro valida Análisis de Métricas de Martina
+('C0000000-0000-0000-0000-000000000012', 'B0000000-0000-0000-0000-000000000014',
+ '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000089',
+ '10000000-0000-0000-0000-000000000013',
+ 'COLABORADOR',
+ 'Martina demostró capacidad para interpretar métricas y proponer mejoras basadas en datos.',
+ '2023-04-06 10:00:00+00')
 ON CONFLICT (id) DO NOTHING;
 
