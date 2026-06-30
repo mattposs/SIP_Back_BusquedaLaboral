@@ -1,0 +1,144 @@
+﻿Datos mockeados para la Demo Final - Skill Passport
+Objetivo
+Actualizar los datos de prueba para acompañar el nuevo storytelling de la demo.
+Se incorporan nuevos perfiles, una nueva empresa y una nueva oferta laboral enfocada en Marketing Digital.
+________________
+
+
+1. Datos a crear
+Nuevas habilidades
+Las siguientes habilidades deben existir en la base de datos para poder utilizarlas tanto en perfiles como en ofertas laborales.
+Si alguna todavía no existe, crearla.
+* Marketing Digital
+* Gestión de Redes Sociales
+* Meta Ads
+* Google Analytics
+* Análisis de Métricas
+* Gestión de Campañas Digitales
+* Google Ads
+* SEO
+Verificar además que exista:
+* Trabajo en Equipo
+________________
+
+
+Nueva empresa
+TechNova
+Industria
+Tecnología (SaaS)
+Descripción
+Empresa tecnológica enfocada en soluciones SaaS para pequeñas y medianas empresas, con un equipo de Marketing Digital dedicado a adquisición de usuarios, campañas de performance y analítica.
+________________
+
+
+2. Reclutador
+Crear un usuario reclutador asociado a TechNova.
+Datos sugeridos
+Nombre
+Laura Fernández
+Cargo
+Talent Acquisition Specialist
+Debe tener publicada una única oferta laboral que será utilizada durante toda la demo.
+________________
+
+
+3. Oferta laboral
+Título
+Analista Junior de Marketing Digital
+Modalidad
+Híbrida
+* 3 días remoto
+* 2 días presencial
+Jornada
+Full Time
+Ubicación
+Buenos Aires
+Salario
+USD 2.100 - USD 2.500 mensuales
+El salario debe mostrarse en dólares estadounidenses (USD).
+Descripción
+Buscamos una persona con ganas de desarrollarse en Marketing Digital.
+Participará en campañas digitales, optimización de anuncios, análisis de métricas y elaboración de reportes.
+Valoramos personas con iniciativa, pensamiento analítico y trabajo colaborativo.
+Habilidades requeridas
+* Marketing Digital
+* Gestión de Redes Sociales
+* Meta Ads
+* Google Analytics
+* Análisis de Métricas
+* Trabajo en Equipo
+* Gestión de Campañas Digitales
+* Google Ads
+* SEO
+El algoritmo debe devolver aproximadamente un 78% de coincidencia para Martina.
+________________
+
+
+4. Martina López
+Datos generales
+* 22 años
+* Estudiante de Marketing
+* UADE - 3.er año
+Descripción
+Estudiante de Marketing apasionada por el marketing digital y el análisis de datos.
+Durante una pasantía participó en campañas digitales, gestión de redes sociales y elaboración de reportes.
+Busca su primera experiencia laboral efectiva.
+Experiencia
+Agencia Nova Marketing
+Pasantía (6 meses)
+Tareas realizadas:
+* Gestión de campañas
+* Gestión de redes sociales
+* Elaboración de reportes
+* Análisis de métricas
+* Seguimiento de campañas
+Habilidades del perfil
+* Marketing Digital
+* Gestión de Redes Sociales
+* Meta Ads
+* Google Analytics
+* Análisis de Métricas
+* Trabajo en Equipo
+* Gestión de Campañas Digitales
+Habilidades ya validadas
+* Marketing Digital
+* Gestión de Redes Sociales
+* Meta Ads
+* Google Analytics
+* Análisis de Métricas
+________________
+
+
+5. Tomás Fernández
+Crear un candidato que actuará como validador durante la demo.
+Relación con Martina
+Compañero de la facultad.
+Trabajó con Martina en distintos proyectos grupales.
+Estado inicial
+Debe existir una solicitud de validación pendiente enviada por Tomás a Martina, correspondiente a la habilidad:
+* Trabajo en Equipo
+Esta solicitud debe aparecer en la bandeja de solicitudes pendientes de Martina para que pueda responderla durante la demo.
+________________
+
+
+6. Leandro Gómez
+Crear un candidato que actuará como posible validador.
+Relación con Martina
+Compañero durante su pasantía.
+Especialista en Marketing Digital.
+Debe aparecer entre los validadores sugeridos cuando Martina solicite una validación para la habilidad:
+* Gestión de Campañas Digitales
+No debe existir ninguna solicitud precargada relacionada con esta habilidad.
+________________
+
+
+7. Flujo esperado
+Al comenzar la demo:
+* Martina posee cinco habilidades ya validadas.
+* Martina tiene una solicitud de validación pendiente enviada por Tomás para la habilidad Trabajo en Equipo.
+* Existe la empresa TechNova con una oferta laboral de Marketing Digital.
+* Martina obtiene aproximadamente un 78% de coincidencia con dicha oferta.
+Durante la demo se generan las siguientes acciones:
+* Martina solicita a Leandro una validación para la habilidad Gestión de Campañas Digitales.
+* Martina responde la solicitud de validación enviada por Tomás para Trabajo en Equipo.
+* Martina consulta la oferta laboral de TechNova y utiliza el flujo de Reverse Pitch.
