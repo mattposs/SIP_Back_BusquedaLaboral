@@ -153,6 +153,10 @@ VALUES
 ('10000000-0000-0000-0000-000000000011', '2023-04-01 10:00:00+00', 'martina@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
 ('10000000-0000-0000-0000-000000000012', '2023-04-01 10:00:00+00', 'tomas@example.com',      '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
 ('10000000-0000-0000-0000-000000000013', '2023-04-01 10:00:00+00', 'leandro@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
+-- Candidatos adicionales para match con oferta Marketing Digital
+('10000000-0000-0000-0000-000000000014', '2023-04-05 10:00:00+00', 'sofia@example.com',      '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
+('10000000-0000-0000-0000-000000000015', '2023-04-06 10:00:00+00', 'nicolas@example.com',    '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
+('10000000-0000-0000-0000-000000000016', '2023-04-07 10:00:00+00', 'valentina@example.com',  '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'CANDIDATE'),
 -- Reclutadores
 ('60000000-0000-0000-0000-000000000001', '2023-01-01 10:00:00+00', 'rrhh@innovaciontec.com',       '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER'),
 ('60000000-0000-0000-0000-000000000002', '2023-01-15 10:00:00+00', 'seleccion@solucionesdatos.com', '$2a$10$bMErL2WzvER8cRbZoO.HSe3VgvSMTqRf4mo8GBdqmwBSElqbdeXp6', 'RECRUITER'),
@@ -196,7 +200,14 @@ VALUES
 ('10000000-0000-0000-0000-000000000012', 'Estudiante de Marketing',    'Tomás Fernández',
  'Estudiante de Marketing. Compañero de facultad.',           TRUE,  'linkedin.com/in/tomasfernandez',   'Buenos Aires, Argentina', '+54-11-5555-2222', 70, 'tomas.jpg'),
 ('10000000-0000-0000-0000-000000000013', 'Especialista Marketing Digital', 'Leandro Gómez',
- 'Especialista en Marketing Digital con experiencia en campañas de performance.', TRUE, 'linkedin.com/in/leandrogomez', 'Buenos Aires, Argentina', '+54-11-5555-3333', 85, 'leandro.jpg')
+ 'Especialista en Marketing Digital con experiencia en campañas de performance.', TRUE, 'linkedin.com/in/leandrogomez', 'Buenos Aires, Argentina', '+54-11-5555-3333', 85, 'leandro.jpg'),
+-- Candidatos adicionales para match con oferta Marketing Digital
+('10000000-0000-0000-0000-000000000014', 'Estudiante de Comunicación',    'Sofía Ramírez',
+ 'Estudiante de Comunicación Social con interés en marketing digital y análisis de datos. Experiencia básica en redes sociales y herramientas de analítica.', TRUE, 'linkedin.com/in/sofiaramirez', 'Buenos Aires, Argentina', '+54-11-5555-4444', 75, 'sofia.jpg'),
+('10000000-0000-0000-0000-000000000015', 'Estudiante de Publicidad',      'Nicolás Herrera',
+ 'Estudiante de Publicidad con experiencia en gestión de redes sociales para emprendimientos. Busca insertarse en el mundo del marketing digital.', FALSE, 'linkedin.com/in/nicolasherrera', 'Córdoba, Argentina', '+54-351-555-6666', 60, 'nicolas.jpg'),
+('10000000-0000-0000-0000-000000000016', 'Pasante de Marketing',          'Valentina Castro',
+ 'Recién graduada en Marketing con pasantía en agencia digital. Conocimientos en Google Analytics y campañas de Meta Ads.', TRUE, 'linkedin.com/in/valentinacastro', 'Buenos Aires, Argentina', '+54-11-5555-7777', 80, 'valentina.jpg')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -394,7 +405,43 @@ VALUES
 ('25000000-0000-0000-0000-000000000060', '10000000-0000-0000-0000-000000000012',
  '20000000-0000-0000-0000-000000000085', 'COLABORADOR',       5.50, '<1 year',    '2023-04-01 10:00:00+00'),  -- Marketing Digital
 ('25000000-0000-0000-0000-000000000061', '10000000-0000-0000-0000-000000000012',
- '20000000-0000-0000-0000-000000000093', 'COLABORADOR',       6.00, '<1 year',    '2023-04-01 10:00:00+00')   -- Trabajo en Equipo
+ '20000000-0000-0000-0000-000000000093', 'COLABORADOR',       6.00, '<1 year',    '2023-04-01 10:00:00+00'),  -- Trabajo en Equipo
+
+-- Sofía Ramírez: tiene 5 de 9 skills de la oferta (~70% match)
+-- Tiene: Marketing Digital, Google Analytics, Análisis de Métricas, Trabajo en Equipo, Gestión de Campañas Digitales
+-- No tiene: Gestión de Redes Sociales, Meta Ads, Google Ads, SEO
+('25000000-0000-0000-0000-000000000062', '10000000-0000-0000-0000-000000000014',
+ '20000000-0000-0000-0000-000000000085', 'COLABORADOR',       5.80, '<1 year',    '2023-04-05 10:00:00+00'),  -- Marketing Digital
+('25000000-0000-0000-0000-000000000063', '10000000-0000-0000-0000-000000000014',
+ '20000000-0000-0000-0000-000000000088', 'COLABORADOR',       5.50, '<1 year',    '2023-04-05 10:00:00+00'),  -- Google Analytics
+('25000000-0000-0000-0000-000000000064', '10000000-0000-0000-0000-000000000014',
+ '20000000-0000-0000-0000-000000000089', 'COLABORADOR',       5.20, '<1 year',    '2023-04-05 10:00:00+00'),  -- Análisis de Métricas
+('25000000-0000-0000-0000-000000000065', '10000000-0000-0000-0000-000000000014',
+ '20000000-0000-0000-0000-000000000093', 'COLABORADOR',       6.00, '<1 year',    '2023-04-05 10:00:00+00'),  -- Trabajo en Equipo
+('25000000-0000-0000-0000-000000000066', '10000000-0000-0000-0000-000000000014',
+ '20000000-0000-0000-0000-000000000090', 'COLABORADOR',       4.80, '<1 year',    '2023-04-05 10:00:00+00'),  -- Gestión de Campañas Digitales
+
+-- Nicolás Herrera: tiene 3 de 9 skills de la oferta (~50% match)
+-- Tiene: Marketing Digital, Gestión de Redes Sociales, Trabajo en Equipo
+-- No tiene: Meta Ads, Google Analytics, Análisis de Métricas, Gestión de Campañas Digitales, Google Ads, SEO
+('25000000-0000-0000-0000-000000000067', '10000000-0000-0000-0000-000000000015',
+ '20000000-0000-0000-0000-000000000085', 'COLABORADOR',       4.50, '<1 year',    '2023-04-06 10:00:00+00'),  -- Marketing Digital
+('25000000-0000-0000-0000-000000000068', '10000000-0000-0000-0000-000000000015',
+ '20000000-0000-0000-0000-000000000086', 'COLABORADOR',       5.00, '<1 year',    '2023-04-06 10:00:00+00'),  -- Gestión de Redes Sociales
+('25000000-0000-0000-0000-000000000069', '10000000-0000-0000-0000-000000000015',
+ '20000000-0000-0000-0000-000000000093', 'COLABORADOR',       5.50, '<1 year',    '2023-04-06 10:00:00+00'),  -- Trabajo en Equipo
+
+-- Valentina Castro: tiene 4 de 9 skills de la oferta (~60% match)
+-- Tiene: Marketing Digital, Meta Ads, Google Analytics, Gestión de Campañas Digitales
+-- No tiene: Gestión de Redes Sociales, Análisis de Métricas, Trabajo en Equipo, Google Ads, SEO
+('25000000-0000-0000-0000-000000000070', '10000000-0000-0000-0000-000000000016',
+ '20000000-0000-0000-0000-000000000085', 'COLABORADOR',       6.00, '<1 year',    '2023-04-07 10:00:00+00'),  -- Marketing Digital
+('25000000-0000-0000-0000-000000000071', '10000000-0000-0000-0000-000000000016',
+ '20000000-0000-0000-0000-000000000087', 'COLABORADOR',       5.50, '<1 year',    '2023-04-07 10:00:00+00'),  -- Meta Ads
+('25000000-0000-0000-0000-000000000072', '10000000-0000-0000-0000-000000000016',
+ '20000000-0000-0000-0000-000000000088', 'COLABORADOR',       5.80, '<1 year',    '2023-04-07 10:00:00+00'),  -- Google Analytics
+('25000000-0000-0000-0000-000000000073', '10000000-0000-0000-0000-000000000016',
+ '20000000-0000-0000-0000-000000000090', 'COLABORADOR',       5.00, '<1 year',    '2023-04-07 10:00:00+00')   -- Gestión de Campañas Digitales
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -425,6 +472,8 @@ VALUES
 ('10000000-0000-0000-0000-000000000010', TRUE,  8, 'PLATINO', 4.95, 'SENIOR', 98, 50),
 ('10000000-0000-0000-0000-000000000004', TRUE,  4, 'ORO',     4.20, 'SENIOR', 92, 15),
 ('10000000-0000-0000-0000-000000000008', TRUE,  6, 'ORO',     4.50, 'SENIOR', 90, 18),
+-- Martina López - validadora (Demo Final)
+('10000000-0000-0000-0000-000000000011', TRUE,  1, 'BRONCE',  2.00, 'JUNIOR', 0, 0),
 -- Leandro Gómez - validador sugerido (Demo Final)
 ('10000000-0000-0000-0000-000000000013', TRUE,  3, 'PLATA',   3.80, 'SEMI_SENIOR', 90, 10)
 ON CONFLICT (user_id) DO NOTHING;
@@ -478,7 +527,23 @@ VALUES
  'Analista Junior de Marketing Digital',
  'Buscamos una persona con ganas de desarrollarse en Marketing Digital. Participará en campañas digitales, optimización de anuncios, análisis de métricas y elaboración de reportes. Valoramos personas con iniciativa, pensamiento analítico y trabajo colaborativo.',
  'Modalidad híbrida (3 días remoto, 2 presencial), capacitación continua, obra social.',
- 'Buenos Aires', 'HYBRID', 2100.00, 2500.00, 'JUNIOR', 'PUBLISHED')
+ 'Buenos Aires', 'HYBRID', 2100.00, 2500.00, 'JUNIOR', 'PUBLISHED'),
+
+-- Oferta DigiCommerce - Community Manager Junior (Demo Final - match ~62% Martina)
+('70000000-0000-0000-0000-000000000007', '50000000-0000-0000-0000-000000000003',
+ '60000000-0000-0000-0000-000000000003', '2023-04-20 10:00:00+00',
+ 'Community Manager Junior',
+ 'Buscamos a alguien creativo para gestionar nuestras redes sociales, crear contenido y analizar el impacto de las publicaciones. Se requiere experiencia en SEO y Google Ads para potenciar el alcance orgánico y pago.',
+ 'Horarios flexibles, descuentos en productos, capacitación.',
+ 'Buenos Aires', 'REMOTE', 1800.00, 2200.00, 'JUNIOR', 'PUBLISHED'),
+
+-- Oferta Innovación Tecnológica - Asistente de E-commerce (Demo Final - match ~45% Martina)
+('70000000-0000-0000-0000-000000000008', '50000000-0000-0000-0000-000000000001',
+ '60000000-0000-0000-0000-000000000001', '2023-04-22 10:00:00+00',
+ 'Asistente de E-commerce y Marketing',
+ 'Sumate a nuestro equipo de comercio electrónico. Necesitamos alguien que combine conocimientos de marketing digital con habilidades técnicas para optimizar nuestra tienda online y campañas de adquisición.',
+ 'Seguro médico, bono semestral, trabajo remoto.',
+ 'Buenos Aires (Híbrido)', 'HYBRID', 1600.00, 2000.00, 'JUNIOR', 'PUBLISHED')
 ON CONFLICT (id) DO NOTHING;
 
 
@@ -513,7 +578,27 @@ VALUES
 ('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000093', 'REQUIRED'),  -- Trabajo en Equipo
 ('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000090', 'DESIRABLE'), -- Gestión de Campañas Digitales
 ('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000091', 'DESIRABLE'), -- Google Ads
-('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000092', 'DESIRABLE')  -- SEO
+('70000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000092', 'DESIRABLE'), -- SEO
+-- Habilidades requeridas para Community Manager Junior (DigiCommerce)
+-- Martina tiene: Gestión de Redes Sociales, Marketing Digital, Meta Ads, Análisis de Métricas
+-- Martina NO tiene: SEO, Google Ads, HTML, CSS
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000086', 'REQUIRED'),  -- Gestión de Redes Sociales (tiene)
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000085', 'REQUIRED'),  -- Marketing Digital (tiene)
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000092', 'REQUIRED'),  -- SEO (NO tiene)
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000091', 'REQUIRED'),  -- Google Ads (NO tiene)
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000087', 'DESIRABLE'), -- Meta Ads (tiene)
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000089', 'DESIRABLE'), -- Análisis de Métricas (tiene)
+('70000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000014', 'DESIRABLE'), -- HTML (NO tiene)
+-- Habilidades requeridas para Asistente de E-commerce (Innovación Tecnológica)
+-- Martina tiene: Marketing Digital, Google Analytics
+-- Martina NO tiene: HTML, CSS, SEO, Google Ads, React
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000085', 'REQUIRED'),  -- Marketing Digital (tiene)
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000014', 'REQUIRED'),  -- HTML (NO tiene)
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000015', 'REQUIRED'),  -- CSS (NO tiene)
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000092', 'REQUIRED'),  -- SEO (NO tiene)
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000091', 'REQUIRED'),  -- Google Ads (NO tiene)
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000088', 'DESIRABLE'), -- Google Analytics (tiene)
+('70000000-0000-0000-0000-000000000008', '20000000-0000-0000-0000-000000000010', 'DESIRABLE')  -- React (NO tiene)
 ON CONFLICT (offer_id, skill_id) DO NOTHING;
 
 
@@ -532,7 +617,23 @@ VALUES
  '70000000-0000-0000-0000-000000000005', '2023-02-01 10:00:00+00', 78, TRUE,  '2023-02-10 14:00:00+00', 'INTERESTED'),
 -- Match Martina con oferta TechNova (Demo Final) - 78% coincidencia
 ('80000000-0000-0000-0000-000000000006', '10000000-0000-0000-0000-000000000011',
- '70000000-0000-0000-0000-000000000006', '2023-04-16 10:00:00+00', 78, FALSE, NULL, 'SUGGESTED')
+ '70000000-0000-0000-0000-000000000006', '2023-04-16 10:00:00+00', 78, FALSE, NULL, 'SUGGESTED'),
+-- Match Martina con Community Manager Junior (DigiCommerce) - 62% coincidencia
+('80000000-0000-0000-0000-000000000007', '10000000-0000-0000-0000-000000000011',
+ '70000000-0000-0000-0000-000000000007', '2023-04-21 10:00:00+00', 62, FALSE, NULL, 'SUGGESTED'),
+-- Match Martina con Asistente de E-commerce (Innovación Tecnológica) - 45% coincidencia
+('80000000-0000-0000-0000-000000000008', '10000000-0000-0000-0000-000000000011',
+ '70000000-0000-0000-0000-000000000008', '2023-04-23 10:00:00+00', 45, FALSE, NULL, 'SUGGESTED'),
+-- Matches de candidatos adicionales con Analista Junior de Marketing Digital (TechNova)
+-- Sofía Ramírez - 70% coincidencia
+('80000000-0000-0000-0000-000000000009', '10000000-0000-0000-0000-000000000014',
+ '70000000-0000-0000-0000-000000000006', '2023-04-17 10:00:00+00', 70, FALSE, NULL, 'SUGGESTED'),
+-- Nicolás Herrera - 50% coincidencia
+('80000000-0000-0000-0000-000000000010', '10000000-0000-0000-0000-000000000015',
+ '70000000-0000-0000-0000-000000000006', '2023-04-18 10:00:00+00', 50, FALSE, NULL, 'SUGGESTED'),
+-- Valentina Castro - 60% coincidencia
+('80000000-0000-0000-0000-000000000011', '10000000-0000-0000-0000-000000000016',
+ '70000000-0000-0000-0000-000000000006', '2023-04-19 10:00:00+00', 60, FALSE, NULL, 'SUGGESTED')
 ON CONFLICT (id) DO NOTHING;
 
 
